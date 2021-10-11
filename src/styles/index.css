@@ -2,6 +2,30 @@
     --main-green-color :#128c7e;
     --main-green-color-dark :#075e54;
     --main-bg-color-dark :#d8dbd6;
+    --main-bg-color-grey :#f6f6f6;
+
+}
+
+html{
+    height: 100vh;
+    background-color: var(--main-bg-color-dark);
+}
+
+input{
+    border-radius: 18px;
+    outline: none;
+    padding: 8px 16px;
+    margin-left: 8px;
+    border: none;
+}
+
+.bg-grey{
+    background-color: var(--main-bg-color-dark);
+}
+
+
+.form_input label{
+    margin-bottom: 0;
 
 }
 
@@ -11,4 +35,16 @@
 
 .pb-64{
     padding-bottom: 128px;
+}
+
+.bg-white{
+    background-color: white;
+}
+
+#login h2{
+    font-weight: 300;
+}
+
+#login input {
+    background-color: var(--main-bg-color-grey);
 }

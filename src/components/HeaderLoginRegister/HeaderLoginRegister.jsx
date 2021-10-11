@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Header_Login_Register() {
+function HeaderLoginRegister() {
     return (
         <div className="d-flex px-3 pt-4 pb-64 bg-green">
             <img src="https://static.whatsapp.net/rsrc.php/ym/r/36B424nhiL4.svg" alt="" />
@@ -9,4 +9,4 @@ function Header_Login_Register() {
     )
 }
 
-export default Header_Login_Register
+export default HeaderLoginRegister
