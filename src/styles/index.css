@@ -29,6 +29,10 @@ input{
     background-color: var(--main-bg-color-dark);
 }
 
+.Btn-size-border{
+
+}
+
 
 .form_input label{
     margin-bottom: 0;
@@ -53,4 +57,28 @@ input{
 
 #login input {
     background-color: var(--main-bg-color-grey);
+}
+
+#login button {
+    width: 256px; 
+    border-radius: 18px;
+}
+
+#login hr {
+    width: 25%;
+}
+
+#login strong {
+    cursor: pointer;
+    color: grey;
+    transition: all .5s;
+}
+
+#login strong:hover{
+    text-decoration: underline;
+    color: #075e54;
+}
+
+.translate_-2px {
+    transform: translateY(-2px);
 }
