@@ -1,7 +1,7 @@
 :root{
     --main-green-color :#128c7e;
     --main-green-color-dark :#075e54;
-    --main-bg-color-dark :#d8dbd6;
+    --main-bg-color-dark :#ededed;
     --main-bg-color-grey :#f6f6f6;
 
 }
@@ -28,11 +28,6 @@ input{
 .bg-grey{
     background-color: var(--main-bg-color-dark);
 }
-
-.Btn-size-border{
-
-}
-
 
 .form_input label{
     margin-bottom: 0;
@@ -108,4 +103,28 @@ input{
 
 .translate_-2px {
     transform: translateY(-2px);
+}
+
+.bg-grey{
+    background-color: var(--main-bg-color-dark);
+}
+
+.icon-wrapper{
+    width: 40;
+    height: 40;
+    cursor: pointer;
+}
+
+.icon-wrapper:hover {
+    background-color: #075e54;
+    border-radius: 100px;
+}
+
+.borderRadiusLeft-18 {
+    border-radius: 18px 0px 0px 18px;
+}
+
+.avatar-my-profile{
+    height: 40px;
+    object-fit: cover;
 }

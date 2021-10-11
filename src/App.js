@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import Home from './views/Home/Home';
+import AppPage from './views/AppPage/AppPage';
 import Login from './views/Login/Login';
 import Register from './views/Register/Register';
 import Details from './views/Details/Details';
@@ -16,12 +16,12 @@ function App() {
             <Login {...routerProps} />}>
           </Route>
           
-          <Route path="/home" exact render={(routerProps) =>
-            <Home {...routerProps} />}>
+          <Route path="/" exact render={(routerProps) =>
+            <AppPage {...routerProps} />}>
           </Route>
 
 
-          <Route path="/" exact render={(routerProps) =>
+          <Route path="/register" exact render={(routerProps) =>
             <Register {...routerProps} />}>
           </Route>
 
