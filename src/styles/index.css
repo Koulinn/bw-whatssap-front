@@ -19,6 +19,12 @@ input{
     border: none;
 }
 
+.register_login_border_shadow_translate{
+    border-radius: 18px;
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-64px)
+}
+
 .bg-grey{
     background-color: var(--main-bg-color-dark);
 }
