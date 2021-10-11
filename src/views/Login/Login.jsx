@@ -1,10 +1,11 @@
 import React from 'react'
 import { Button, Container, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import HeaderLoginRegister from '../../components/HeaderLoginRegister/HeaderLoginRegister'
+import HeaderLoginRegister from '../../components/Login_Register_Shareable/HeaderLoginRegister/HeaderLoginRegister'
 import { useState, useEffect } from 'react'
-import InputDefault from '../../components/InputDefault/InputDefault'
+import InputDefault from '../../components/Login_Register_Shareable/InputDefault/InputDefault'
 import GoogleButton from 'react-google-button'
+import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
 
 export const Login = (props) => {
     const [userEmail, setUserEmail] = useState('')
@@ -24,11 +25,7 @@ export const Login = (props) => {
                                 <Button variant="success">Login</Button>
                             </div>
 
-                            <div className="col-8 d-flex align-items-center my-5">
-                                <hr className="mr-0" />
-                                <span className="px-3 d-flex align-items-center translate_-2px">or</span>
-                                <hr className="ml-0" />
-                            </div>
+                            <Divisor/>
                             <div className="col-8 d-flex justify-content-center">
                                 <GoogleButton className="googleBtn" />
                             </div>
