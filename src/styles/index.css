@@ -78,6 +78,33 @@ input{
     text-decoration: underline;
     color: #075e54;
 }
+#register h2{
+    font-weight: 300;
+}
+
+#register input {
+    background-color: var(--main-bg-color-grey);
+}
+
+#register button {
+    width: 256px; 
+    border-radius: 18px;
+}
+
+#register hr {
+    width: 25%;
+}
+
+#register strong {
+    cursor: pointer;
+    color: grey;
+    transition: all .5s;
+}
+
+#register strong:hover{
+    text-decoration: underline;
+    color: #075e54;
+}
 
 .translate_-2px {
     transform: translateY(-2px);
