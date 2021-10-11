@@ -12,7 +12,7 @@ function App() {
       <Router>
 
         
-          <Route path="/" exact render={(routerProps) =>
+          <Route path="/login" exact render={(routerProps) =>
             <Login {...routerProps} />}>
           </Route>
           
@@ -21,7 +21,7 @@ function App() {
           </Route>
 
 
-          <Route path="/register" exact render={(routerProps) =>
+          <Route path="/" exact render={(routerProps) =>
             <Register {...routerProps} />}>
           </Route>
 
