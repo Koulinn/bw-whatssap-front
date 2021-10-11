@@ -5,7 +5,7 @@ function UserMenu() {
     return (
         <div className="d-flex justify-content-between align-items-center px-3 py-3 bg-grey borderRadiusLeft-18">
             <div>
-                <img className="avatar-my-profile" width="40" style={{borderRadius: '200px'}} src="https://miro.medium.com/max/790/1*reXbWdk_3cew69RuAUbVzg.png" alt="" />
+                <img className="avatar-my-profile" width="40" src="https://miro.medium.com/max/790/1*reXbWdk_3cew69RuAUbVzg.png" alt="" />
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <div className="icon-wrapper p-2">

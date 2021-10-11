@@ -3,6 +3,7 @@
     --main-green-color-dark :#075e54;
     --main-bg-color-dark :#ededed;
     --main-bg-color-grey :#f6f6f6;
+    --main-br-color-lightBlue: #9de1fe;
 
 }
 
@@ -121,10 +122,19 @@ input{
 }
 
 .borderRadiusLeft-18 {
-    border-radius: 18px 0px 0px 18px;
+    border-radius: 18px 0px 0px 0px;
 }
 
 .avatar-my-profile{
     height: 40px;
     object-fit: cover;
+    border-radius: 200px;
+}
+
+.lightBlue-BG{
+    background-color: var(--main-br-color-lightBlue);
+}
+
+.notification-off{
+    fill: white;
 }

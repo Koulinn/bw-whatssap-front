@@ -5,6 +5,8 @@ import requests from '../../lib old/request-handler'
 import HeaderLoginRegister from '../../components/Login_Register_Shareable/HeaderLoginRegister/HeaderLoginRegister'
 import { Container, Row } from 'react-bootstrap'
 import { DisplayLastChatsColumn } from './components/SmallColumn/DisplayLastChatsColumn'
+import { SearchBar } from './components/SmallColumn/User/SearchBar'
+import { Notification } from './components/SmallColumn/User/Notification'
 
 
 export const AppPage = (props) => {
@@ -18,6 +20,8 @@ export const AppPage = (props) => {
                 <Row className="px-0">
                     <div className="col-4">
                         <DisplayLastChatsColumn/>
+                        <Notification/>
+                        <SearchBar/>
 
                     </div>
                     <div className="col-8">
