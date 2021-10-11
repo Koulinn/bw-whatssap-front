@@ -3,7 +3,7 @@ import Home from './views/Home/Home';
 import Login from './views/Login/Login';
 import Register from './views/Register/Register';
 import Details from './views/Details/Details';
-import { Container } from 'react-bootstrap';
+
 
 function App() {
   return (
@@ -11,15 +11,15 @@ function App() {
 
       <Router>
 
-        <Container>
+        
+          <Route path="/" exact render={(routerProps) =>
+            <Login {...routerProps} />}>
+          </Route>
           
           <Route path="/home" exact render={(routerProps) =>
             <Home {...routerProps} />}>
           </Route>
 
-          <Route path="/" exact render={(routerProps) =>
-            <Login {...routerProps} />}>
-          </Route>
 
           <Route path="/register" exact render={(routerProps) =>
             <Register {...routerProps} />}>
@@ -29,7 +29,7 @@ function App() {
             <Details {...routerProps} />}>
           </Route>
           
-        </Container>
+   
       </Router>
 
 

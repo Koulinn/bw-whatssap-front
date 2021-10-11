@@ -1,5 +1,14 @@
-:roo{
-    --main-bg-color :#128c7e;
-    --main-bg-color-dark :#075e54
+:root{
+    --main-green-color :#128c7e;
+    --main-green-color-dark :#075e54;
+    --main-bg-color-dark :#d8dbd6;
 
+}
+
+.bg-green{
+    background-color: var(--main-green-color);
+}
+
+.pb-64{
+    padding-bottom: 128px;
 }
