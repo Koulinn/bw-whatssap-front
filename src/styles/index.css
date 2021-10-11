@@ -1,0 +1,111 @@
+:root{
+    --main-green-color :#128c7e;
+    --main-green-color-dark :#075e54;
+    --main-bg-color-dark :#d8dbd6;
+    --main-bg-color-grey :#f6f6f6;
+
+}
+
+html{
+    height: 100vh;
+    background-color: var(--main-bg-color-dark);
+}
+
+input{
+    border-radius: 18px;
+    outline: none;
+    padding: 8px 16px;
+    margin-left: 8px;
+    border: none;
+}
+
+.register_login_border_shadow_translate{
+    border-radius: 18px;
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-64px)
+}
+
+.bg-grey{
+    background-color: var(--main-bg-color-dark);
+}
+
+.Btn-size-border{
+
+}
+
+
+.form_input label{
+    margin-bottom: 0;
+
+}
+
+.bg-green{
+    background-color: var(--main-green-color);
+}
+
+.pb-64{
+    padding-bottom: 128px;
+}
+
+.bg-white{
+    background-color: white;
+}
+
+#login h2{
+    font-weight: 300;
+}
+
+#login input {
+    background-color: var(--main-bg-color-grey);
+}
+
+#login button {
+    width: 256px; 
+    border-radius: 18px;
+}
+
+#login hr {
+    width: 25%;
+}
+
+#login strong {
+    cursor: pointer;
+    color: grey;
+    transition: all .5s;
+}
+
+#login strong:hover{
+    text-decoration: underline;
+    color: #075e54;
+}
+#register h2{
+    font-weight: 300;
+}
+
+#register input {
+    background-color: var(--main-bg-color-grey);
+}
+
+#register button {
+    width: 256px; 
+    border-radius: 18px;
+}
+
+#register hr {
+    width: 25%;
+}
+
+#register strong {
+    cursor: pointer;
+    color: grey;
+    transition: all .5s;
+}
+
+#register strong:hover{
+    text-decoration: underline;
+    color: #075e54;
+}
+
+.translate_-2px {
+    transform: translateY(-2px);
+}

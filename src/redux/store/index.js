@@ -19,7 +19,6 @@ export const initialState = {
 
 export const groupedReducers = combineReducers({
     user: reducerLib.userReducer,
-    serverError: reducerLib.serverReducer
 })
 
 

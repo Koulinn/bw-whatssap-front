@@ -14,7 +14,7 @@ import { Container } from 'react-bootstrap';
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <Container fluid>
+      <Container className="m-0 p-0" fluid>
         <App />
       </Container>
     </PersistGate>
