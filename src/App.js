@@ -13,11 +13,11 @@ function App() {
 
         <Container>
           
-          <Route path="/" exact render={(routerProps) =>
+          <Route path="/home" exact render={(routerProps) =>
             <Home {...routerProps} />}>
           </Route>
 
-          <Route path="/login" exact render={(routerProps) =>
+          <Route path="/" exact render={(routerProps) =>
             <Login {...routerProps} />}>
           </Route>
 
