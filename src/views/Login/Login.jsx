@@ -14,9 +14,9 @@ export const Login = (props) => {
             <HeaderLoginRegister />
             <Container className="bg-grey px-5" fluid>
                 <Container>
-                    <Row className="p-5  bg-white">
+                    <Row className="p-5  bg-white register_login_border_shadow_translate">
                         <div className="col-8">
-                            <h2 className="mb-2">Login</h2>
+                            <h2 className="mb-5">Login</h2>
                             <InputDefault inputID="email" setFunc={setUserEmail} placeholderText='Enter your email' label="E-mail"/>
                             <InputDefault inputID="password" setFunc={setUserPassword} placeholderText='Enter your password' label="Password"/>
     
