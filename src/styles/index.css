@@ -26,6 +26,13 @@ input{
     transform: translateY(-64px)
 }
 
+.register_login_border_shadow_position{
+    border-radius: 18px;
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.15);
+    top: 24px;
+    height: calc(100vh - 48px);
+}
+
 .bg-grey{
     background-color: var(--main-bg-color-dark);
 }
@@ -151,3 +158,21 @@ input{
 #searchBar-wrapper > div {
     border-radius: 18px;
 }
+
+  #recentChats::-webkit-scrollbar {
+    width: 6px!important;
+    height: 6px!important;
+}
+  
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(195, 195, 195);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(141, 141, 141);
+  }
+
+ .max-text-size-190{
+    max-width: 190px;
+  }

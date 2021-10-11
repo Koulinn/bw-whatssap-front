@@ -14,21 +14,22 @@ export const AppPage = (props) => {
     const test = requests.login()
 
     return (
-        <div>
-            <HeaderLoginRegister hideLogo={true} />
-            <Container className=" px-0 bg-white register_login_border_shadow_translate">
-                <Row className="px-0">
-                    <div className="col-4">
-                        <DisplayLastChatsColumn/>
-                        <Notification/>
-                        <SearchBar/>
-
-                    </div>
-                    <div className="col-8">
-                        <h3>Chat space</h3>
-                    </div>
-
-                </Row>
+        <div className="container-fluid">
+            <Container>
+                <HeaderLoginRegister hideLogo={true} />
+                <Container className=" px-0 bg-white register_login_border_shadow_position position-absolute">
+                    <Row className="px-0 h-100">
+                        <div className="col-4 h-100">
+                            <DisplayLastChatsColumn/>
+                           
+    
+                        </div>
+                        <div className="col-8">
+                            <h3>Chat space</h3>
+                        </div>
+    
+                    </Row>
+                </Container>
             </Container>
         </div>
     )
