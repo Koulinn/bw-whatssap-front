@@ -22,8 +22,8 @@ export const AppPage = (props) => {
                 <Container className=" px-0 bg-white register_login_border_shadow_position position-absolute">
                     <Row className="px-0 mx-0 w-100 h-100">
                         <div className="col-4 px-0 h-100">
-                            {/* <DisplayLastChatsColumn/> */}
-                            <CreateRoom/>
+                            <DisplayLastChatsColumn/>
+                            {/* <CreateRoom/> */}
                            
     
                         </div>
