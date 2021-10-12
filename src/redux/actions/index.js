@@ -1,15 +1,19 @@
 import axios from 'axios'
+
 export const setUserAccessToken = (payload)=>({
     type: 'SET_USER_TOKEN',
     payload: payload
 })
 
+
 export const setUserToken = (email,password,setRedirect)=>{
+
     return async(dispatch,getState)=>{
       const baseUrl = 'http://localhost:3001/user/login'
       try {
-          let response = await axios.post(baseUrl,{ email:email,password:password })
-          if(response.status===200){  
+          let response = await axios.post(baseUrl,{ email:email,password:password },{withCredentials: true})
+          if(response.status===200){
+    
                 setRedirect(true)
                 dispatch({
                   type: 'SET_USER_TOKEN',
@@ -37,7 +41,7 @@ export const registerUserToken = (name,email,password,setRedirect)=>{
     return async(dispatch,getState)=>{
       const baseUrl = 'http://localhost:3001/user/register'
       try {
-          let response = await axios.post(baseUrl,{ name:name,email:email,password:password })
+          let response = await axios.post(baseUrl,{ name:name,email:email,password:password },{withCredentials: true})
           if(response.status===200){  
                 setRedirect(true)
                 dispatch({
