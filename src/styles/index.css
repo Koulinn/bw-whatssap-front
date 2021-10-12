@@ -281,3 +281,28 @@ input {
   fill: white;
   color: white;
 }
+
+#userMenus{
+  bottom: -196px;
+  right: 0px;
+  z-index: 10;
+  box-shadow: 2px 4px 16px rgb(0 0 0 / 15%);
+  border-radius: 8px;
+  width: 358%;
+}
+
+#userMenus ul{
+  list-style: none;
+  border-radius: 18px;
+}
+
+#userMenus ul li {
+  cursor: pointer;
+  transition: all .5s;
+}
+
+#userMenus ul li:hover{
+  text-decoration: underline;
+  color: var(--main-green-color-dark);
+
+}
