@@ -1,5 +1,6 @@
 :root {
   --main-green-color: #128c7e;
+  --bg-green-light:#00bfa5;
   --main-green-color-dark: #075e54;
   --main-bg-color-dark: #ededed;
   --main-bg-color-grey: #f6f6f6;
@@ -42,6 +43,10 @@ input {
 
 .bg-green {
   background-color: var(--main-green-color);
+}
+.bg-green-light {
+  background-color: var(--bg-green-light);
+  border-radius: 18px 0px 0px 18px;
 }
 
 .pb-64 {
@@ -316,4 +321,29 @@ input {
 
 #createRoom h6 {
   color: white;
+}
+
+.contacts-wrapper{
+  overflow-y: scroll;
+  overflow-x: clip;
+}
+
+
+.contacts-wrapper::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+.contacts-wrapper::-webkit-scrollbar-thumb {
+  background: rgb(195, 195, 195);
+}
+
+.contacts-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgb(141, 141, 141);
+}
+
+.selected{
+  border: 2px solid;
+  border-radius: 8px;
+  border-color: var(--main-green-color-dark);
 }
