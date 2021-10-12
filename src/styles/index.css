@@ -195,4 +195,28 @@ input{
       height: 40%;
   }
 
+  .message{
+      background-color: #dcf8c6;
+      border-radius: 18px;
+  }
+
+  .message img {
+      object-fit: cover;
+      width: 100%;
+      max-height: 256px;
+      border-radius: 8px;
+  }
+
+  .myMessage-time{
+      bottom: 4px;
+      right: 16px;
+  }
+
+  .chatMenu-wrapper{
+    border-radius: 0px 18px 0px 0px;
+  }
+
+  #chatDisplay{
+    border-radius: 0px 18px 18px 0px;
+  }
   
