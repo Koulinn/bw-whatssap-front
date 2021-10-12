@@ -18,7 +18,7 @@ import { CreateRoom } from './components/SmallColumn/CreateRoom/CreateRoom'
 const ADDRESS = 'http://localhost:3001'
 const socket = io(ADDRESS, { transports: ['websocket'] })
 
-export const AppPage = (props) => {
+const AppPage = (props) => {
     // const data = UseGetUserData()
     //const test = requests.login()
     const [loggedIn, setLoggedIn] = useState(false)
@@ -95,7 +95,6 @@ export const AppPage = (props) => {
       }
 
 
-export const AppPage = (props) => {
     return (
         <div className="container-fluid">
             <Container>
