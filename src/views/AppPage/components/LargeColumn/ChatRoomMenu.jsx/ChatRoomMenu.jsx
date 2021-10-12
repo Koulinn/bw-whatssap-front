@@ -5,7 +5,7 @@ import ChatStats from './ChatStats/ChatStats'
 
 export const ChatRoomMenu = (props) => {
     return (
-        <div className="d-flex justify-content-between align-items-center py-3 bg-grey">
+        <div className="d-flex justify-content-between align-items-center py-3 bg-grey chatMenu-wrapper">
             <ChatStats/>
             <div className="d-flex justify-content-between align-items-center">
                 <div className="icon-wrapper mx-2 p-2">
