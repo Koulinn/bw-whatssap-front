@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { MdArrowBack } from 'react-icons/md'
 import ReturnMain from '../ShareableComp/ReturnMain'
 import { SearchContacs } from '../ShareableComp/SearchContacs'
-import { ChatRoom } from '../RecentChatColumn/Components/ChatRoom/ChatRoom'
 import UserCard from './UserCard/UserCard'
 import UserBadge from '../UserBadge/UserBadge'
+import CreateGroupBtn from './CreateGroupBtn/CreateGroupBtn'
 
 export const CreateRoom = (props) => {
     return (
@@ -16,8 +16,10 @@ export const CreateRoom = (props) => {
             <div className="d-flex flex-column bg-white" style={{ height: '85.55%' }}>
                 <div className="d-flex align-items-center flex-wrap mt-3 px-3">
                     {/* Need to add logic for spacing and aligment */}
-                    <UserBadge name="random"/>
+                    <UserBadge name="random" />
                 </div>
+                <CreateGroupBtn />
+
                 <SearchContacs />
                 <div className="contacts-wrapper">
                     <UserCard name="randomName" bio="I love cake" />

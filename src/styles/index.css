@@ -366,9 +366,30 @@ input {
   fill: grey;
   stroke: grey;
 }
+#createRoom .create-group-icon svg{
+  border-radius: 200px;
+  width: 24px;
+  height: 24px;
+  color: var(--main-green-color-dark);
+  fill: var(--main-green-color-dark);
+  stroke: var(--main-green-color-dark);
+}
 .userBadge .icon-wrapper:hover{
   background-color: gainsboro;
   width: 24px;
   height: 24px;
 
+}
+
+.create-group-wrapper{
+  cursor: pointer;
+}
+
+.create-group-wrapper>div{
+  transition: all .5s;
+}
+
+.create-group-wrapper>div:hover{
+  background-color: var(--bg-green-light);
+  border-radius: 18px;
 }
