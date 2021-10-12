@@ -347,3 +347,28 @@ input {
   border-radius: 8px;
   border-color: var(--main-green-color-dark);
 }
+
+.userBadge{
+  background-color: var(--main-bg-color-dark);
+  border-radius: 200px;
+  color: grey;
+}
+.userBadge .icon-wrapper{
+  width: 24px;
+  height: 24px;
+}
+
+#createRoom .userBadge svg{
+  border-radius: 200px;
+  width: 16px;
+  height: 16px;
+  color: grey;
+  fill: grey;
+  stroke: grey;
+}
+.userBadge .icon-wrapper:hover{
+  background-color: gainsboro;
+  width: 24px;
+  height: 24px;
+
+}
