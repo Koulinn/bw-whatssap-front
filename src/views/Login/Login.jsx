@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react'
 import InputDefault from '../../components/Login_Register_Shareable/InputDefault/InputDefault'
 import GoogleButton from 'react-google-button'
 import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
-import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { setUserToken } from '../../redux/actions'
@@ -15,13 +14,14 @@ import { useSelector,useDispatch } from 'react-redux'
 export const Login = (props) => {
     const [login, setLogin] = useState({email:'',password:''})
     const [redirect, setRedirect] = useState(false)
+
     const state = useSelector(state => state)
     const dispatch = useDispatch()
 
 
 const email = login.email
 const password = login.password
-// dispatch(setUserToken((email,password,setRedirect)))
+
     const handleInput = (key,value)=>{
         setLogin(
            { ...login,

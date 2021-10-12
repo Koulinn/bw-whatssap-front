@@ -8,30 +8,24 @@ import GoogleButton from 'react-google-button'
 import SideImage from '../../components/Login_Register_Shareable/SideImage/SideImage'
 import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
 import { Redirect } from 'react-router'
-import axios from 'axios'
+import { registerUserToken } from '../../redux/actions'
+import { useDispatch,useSelector } from 'react-redux'
 
 export const Register = (props) => {
     const [register, setRegister] = useState({name:'',password:'',email:''})
     const [redirect, setRedirect] = useState(false)
+    const name = register.name
+    const password = register.password
+    const email = register.email
+    const state = useSelector(state => state)
+    const dispatch = useDispatch()
+
 
     const handleInput = (key,value)=>{
         setRegister(
            { ...register,
           [key]:value}
           )
-}
-const userRegister = async () => {
-    try {
-        const serverResponse = await axios.post(`http://localhost:3001/user/register`, { name:register.name,password:register.password,email:register.email })
-        if(serverResponse.status === 200){
-            console.log(serverResponse.data)
-            setRedirect(true)
-        } else {
-            console.log('else')
-        }
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 if(redirect){
@@ -51,7 +45,7 @@ if(redirect){
                         <InputDefault inputID="email" value={register.email}  handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
                         
                         <div className="col-8 d-flex pl-3 pt-5 mt-5 justify-content-center">
-                            <Button variant="success" onClick={userRegister}>Create an account</Button>
+                            <Button variant="success" onClick={()=>dispatch(registerUserToken(name,email,password,setRedirect))}>Create an account</Button>
                         </div>
     
                         <Divisor/>
@@ -73,12 +67,4 @@ if(redirect){
     )
 }
 
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Register)
+export default Register
