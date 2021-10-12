@@ -123,6 +123,11 @@ input{
     cursor: pointer;
 }
 
+.icon-wrapper > svg {
+    height: 24px;
+    width: 24px;
+}
+
 .icon-wrapper:hover {
     background-color: #075e54;
     border-radius: 100px;
@@ -134,6 +139,14 @@ input{
 
 .avatar-my-profile{
     height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 200px;
+}
+
+.avatar-chat-room{
+    height: 48px;
+    width: 48px;
     object-fit: cover;
     border-radius: 200px;
 }
@@ -174,10 +187,12 @@ input{
   }
 
  .max-text-size-190{
-    max-width: 159px;
+    max-width: 167px;
   }
 
   .emptyStateImg{
       width: 40%;
       height: 40%;
   }
+
+  

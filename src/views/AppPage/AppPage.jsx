@@ -8,6 +8,7 @@ import { DisplayLastChatsColumn } from './components/SmallColumn/DisplayLastChat
 import { SearchBar } from './components/SmallColumn/User/SearchBar'
 import { Notification } from './components/SmallColumn/User/Notification'
 import { EmptyState } from './components/LargeColumn/EmptyState/EmptyState'
+import { ChatRoomMenu } from './components/LargeColumn/ChatRoomMenu.jsx/ChatRoomMenu'
 
 
 export const AppPage = (props) => {
@@ -25,8 +26,9 @@ export const AppPage = (props) => {
                            
     
                         </div>
-                        <div className="col-8 h-100" style={{backgroundColor:'#f8f9fa'}}>
-                            <EmptyState/>
+                        <div className="col-8 px-0 h-100" style={{backgroundColor:'#f8f9fa'}}>
+                            {/* <EmptyState/> */}
+                            <ChatRoomMenu/>
                         </div>
     
                     </Row>
