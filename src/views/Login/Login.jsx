@@ -9,31 +9,41 @@ import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { setUserToken } from '../../redux/actions'
+import { useSelector,useDispatch } from 'react-redux'
 
 export const Login = (props) => {
     const [login, setLogin] = useState({email:'',password:''})
-    const [redirect, setreDirect] = useState(false)
+    const [redirect, setRedirect] = useState(false)
+    const state = useSelector(state => state)
+    const dispatch = useDispatch()
 
+
+const email = login.email
+const password = login.password
+// dispatch(setUserToken((email,password,setRedirect)))
     const handleInput = (key,value)=>{
         setLogin(
            { ...login,
           [key]:value}
           )
 }
-    const userLogin = async () => {
-        try {
-            const serverResponse = await axios.post(`http://localhost:3001/user/login`, { email:login.email,password:login.password })
-            if(serverResponse.status === 200){
-                console.log(serverResponse.data)
-                setreDirect(true)
-            } else {
-                console.log('else')
-            }
-        } catch (error) {
-            console.log(error)
-        }
+
+     
+    // const userLogin = async () => {
+    //     try {
+    //         const serverResponse = await axios.post(`http://localhost:3001/user/login`, { email:login.email,password:login.password })
+    //         if(serverResponse.status === 200){
+    //             console.log(serverResponse.data)
+    //             setRedirect(true)
+    //         } else {
+    //             console.log('else')
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
     
-    }
+    // }
     if(redirect){
         return <Redirect to='/'/>
     }
@@ -49,7 +59,7 @@ export const Login = (props) => {
                             <InputDefault inputID='email' login={login} value={login.email}  handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
                             <InputDefault inputID='password' login={login} value={login.password}   handleInput={handleInput}  placeholderText='Enter your password' label="Password" />
                             <div className="col-8 d-flex pl-3 pt-5 mt-5 justify-content-center">
-                                <Button variant="success" onClick={userLogin}>Login</Button>
+                                <Button variant="success" onClick={()=>dispatch(setUserToken(email,password,setRedirect))}>Login</Button>
                             </div>
 
                             <Divisor/>
@@ -74,12 +84,12 @@ export const Login = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
+// const mapStateToProps = (state) => ({
 
-})
+// })
 
-const mapDispatchToProps = {
+// const mapDispatchToProps = {
 
-}
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login
