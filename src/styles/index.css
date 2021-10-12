@@ -124,10 +124,11 @@ input {
 .icon-wrapper > svg {
   height: 24px;
   width: 24px;
+  color: grey;
+  fill: grey;
 }
 
 .icon-wrapper:hover {
-  background-color: #075e54;
   border-radius: 100px;
 }
 
@@ -254,4 +255,29 @@ input {
 .messageInput-wrapper{
     border-radius: 18px;
 
+}
+
+#attachmentMenu{
+  top: -328px;
+  right: -10px;
+}
+
+#attachmentMenu .icon-wrapper{
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 200px;
+  padding: 8px;
+}
+
+#attachmentMenu .icon-wrapper{
+  background: rgb(45, 46, 44);
+}
+#attachmentMenu .icon-wrapper svg{
+  width: 32px;
+  height: 32px;
+  fill: white;
+  color: white;
 }
