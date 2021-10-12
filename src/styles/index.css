@@ -306,3 +306,14 @@ input {
   color: var(--main-green-color-dark);
 
 }
+
+#createRoom svg{
+  width: 24px;
+  height: 24px;
+  color: white;
+  fill: white;
+}
+
+#createRoom h6 {
+  color: white;
+}
