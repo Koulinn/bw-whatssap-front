@@ -7,6 +7,7 @@ import InputDefault from '../../components/Login_Register_Shareable/InputDefault
 import GoogleButton from 'react-google-button'
 import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
 
+
 export const Login = (props) => {
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
@@ -27,7 +28,7 @@ export const Login = (props) => {
 
                             <Divisor/>
                             <div className="col-8 d-flex justify-content-center">
-                                <GoogleButton className="googleBtn" />
+                              <a href="http://localhost:3001/user/googleLogin"> <GoogleButton className="googleBtn" /></a>
                             </div>
 
                             <div className="col-8 d-flex justify-content-center mt-5">
