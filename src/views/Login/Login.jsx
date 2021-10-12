@@ -8,6 +8,7 @@ import GoogleButton from 'react-google-button'
 import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export const Login = (props) => {
     const [login, setLogin] = useState({email:'',password:''})
@@ -57,7 +58,7 @@ export const Login = (props) => {
                             </div>
 
                             <div className="col-8 d-flex justify-content-center mt-5">
-                                <p>First time? <strong>Create an account</strong> </p>
+                                <p>First time? <Link to='/register'><strong>Create an account</strong></Link> </p>
 
                             </div>
                         </div>

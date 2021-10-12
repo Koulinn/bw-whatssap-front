@@ -7,12 +7,36 @@ import InputDefault from '../../components/Login_Register_Shareable/InputDefault
 import GoogleButton from 'react-google-button'
 import SideImage from '../../components/Login_Register_Shareable/SideImage/SideImage'
 import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
-
+import { Redirect } from 'react-router'
+import axios from 'axios'
 
 export const Register = (props) => {
-    const [userEmail, setUserEmail] = useState('')
-    const [userPassword, setUserPassword] = useState('')
-    const [userName, setUserName] = useState('')
+    const [register, setRegister] = useState({name:'',password:'',email:''})
+    const [redirect, setRedirect] = useState(false)
+
+    const handleInput = (key,value)=>{
+        setRegister(
+           { ...register,
+          [key]:value}
+          )
+}
+const userRegister = async () => {
+    try {
+        const serverResponse = await axios.post(`http://localhost:3001/user/register`, { name:register.name,password:register.password,email:register.email })
+        if(serverResponse.status === 200){
+            console.log(serverResponse.data)
+            setRedirect(true)
+        } else {
+            console.log('else')
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+if(redirect){
+    return <Redirect to='/login'/>
+}
     return (
         <div id="register">
         <HeaderLoginRegister />
@@ -22,12 +46,12 @@ export const Register = (props) => {
                     <div className="col-8">
                         <h2 className="mb-5">Register</h2>
 
-                        <InputDefault inputID="email" setFunc={setUserEmail} placeholderText='Enter your email' label="E-mail" />
-                        <InputDefault inputID="password" setFunc={setUserPassword} placeholderText='Enter your password' label="Password" />
-                        <InputDefault inputID="name" setFunc={setUserName} placeholderText='Enter your name' label="Name" />
+                        <InputDefault inputID="name" value={register.name}  handleInput={handleInput} placeholderText='Enter your name' label="Name" />
+                        <InputDefault inputID="password" value={register.password}  handleInput={handleInput}  placeholderText='Enter your password' label="Password" />
+                        <InputDefault inputID="email" value={register.email}  handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
                         
                         <div className="col-8 d-flex pl-3 pt-5 mt-5 justify-content-center">
-                            <Button variant="success">Create an account</Button>
+                            <Button variant="success" onClick={userRegister}>Create an account</Button>
                         </div>
     
                         <Divisor/>
