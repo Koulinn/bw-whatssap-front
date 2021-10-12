@@ -7,6 +7,7 @@ import { Container, Row } from 'react-bootstrap'
 import { DisplayLastChatsColumn } from './components/SmallColumn/DisplayLastChatsColumn'
 import { SearchBar } from './components/SmallColumn/User/SearchBar'
 import { Notification } from './components/SmallColumn/User/Notification'
+import { EmptyState } from './components/LargeColumn/EmptyState/EmptyState'
 
 
 export const AppPage = (props) => {
@@ -19,13 +20,13 @@ export const AppPage = (props) => {
                 <HeaderLoginRegister hideLogo={true} />
                 <Container className=" px-0 bg-white register_login_border_shadow_position position-absolute">
                     <Row className="px-0 h-100">
-                        <div className="col-4 h-100">
+                        <div className="col-4 pr-0 h-100">
                             <DisplayLastChatsColumn/>
                            
     
                         </div>
-                        <div className="col-8">
-                            <h3>Chat space</h3>
+                        <div className="col-8 h-100" style={{backgroundColor:'#f8f9fa'}}>
+                            <EmptyState/>
                         </div>
     
                     </Row>

@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 
 export const ChatRoom = (props) => {
     return (
-        <div className="d-flex">
+        <div className="d-flex pr-3">
             <div className="p-3 ">
                 <img className="avatar-my-profile" src="https://picsum.photos/200/300" height='48' width="48" alt="" />
             </div>
-            <div className="d-flex flex-grow-1 align-items-center border-bottom">
+            <div className="d-flex align-items-center border-bottom">
                 <div className="d-flex p-2 w-100 justify-content-between">
                     <div className="d-flex flex-column">
                         <p className="mb-0 max-text-size-190">User Name</p>

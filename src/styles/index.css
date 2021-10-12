@@ -174,5 +174,10 @@ input{
   }
 
  .max-text-size-190{
-    max-width: 190px;
+    max-width: 159px;
+  }
+
+  .emptyStateImg{
+      width: 40%;
+      height: 40%;
   }
