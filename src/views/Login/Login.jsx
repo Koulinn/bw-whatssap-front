@@ -8,42 +8,24 @@ import GoogleButton from 'react-google-button'
 import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { setUserToken } from '../../redux/actions'
+import { setUserToken,cookiesUserToken } from '../../redux/actions'
 import { useSelector,useDispatch } from 'react-redux'
 
 export const Login = (props) => {
     const [login, setLogin] = useState({email:'',password:''})
     const [redirect, setRedirect] = useState(false)
+    const email = login.email
+    const password = login.password
 
     const state = useSelector(state => state)
     const dispatch = useDispatch()
-
-
-const email = login.email
-const password = login.password
 
     const handleInput = (key,value)=>{
         setLogin(
            { ...login,
           [key]:value}
-          )
-}
+          )}
 
-     
-    // const userLogin = async () => {
-    //     try {
-    //         const serverResponse = await axios.post(`http://localhost:3001/user/login`, { email:login.email,password:login.password })
-    //         if(serverResponse.status === 200){
-    //             console.log(serverResponse.data)
-    //             setRedirect(true)
-    //         } else {
-    //             console.log('else')
-    //         }
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    
-    // }
     if(redirect){
         return <Redirect to='/'/>
     }
@@ -83,13 +65,4 @@ const password = login.password
         </div>
     )
 }
-
-// const mapStateToProps = (state) => ({
-
-// })
-
-// const mapDispatchToProps = {
-
-// }
-
 export default Login

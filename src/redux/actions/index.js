@@ -61,3 +61,9 @@ export const registerUserToken = (name,email,password,setRedirect)=>{
           })
      } 
 }}
+
+export const cookiesUserToken = ()=>{
+    return async(dispatch,getState)=>{
+        
+    }
+}

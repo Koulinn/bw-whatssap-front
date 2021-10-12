@@ -10,6 +10,7 @@ import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
 import { Redirect } from 'react-router'
 import { registerUserToken } from '../../redux/actions'
 import { useDispatch,useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export const Register = (props) => {
     const [register, setRegister] = useState({name:'',password:'',email:''})
@@ -54,7 +55,7 @@ if(redirect){
                         </div>
     
                         <div className="col-8 d-flex justify-content-center mt-5">
-                            <p>Already have an account? <strong>Return to login</strong> </p>
+                            <p>Already have an account? <Link to='/login'><strong>Return to login</strong> </Link></p>
     
                         </div>
                     </div>
