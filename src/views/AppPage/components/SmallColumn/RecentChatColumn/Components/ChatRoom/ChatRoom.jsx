@@ -7,7 +7,7 @@ export const ChatRoom = (props) => {
             <div className="p-3 ">
                 <img className="avatar-chat-room" src="https://picsum.photos/200/300" height='48' width="48" alt="" />
             </div>
-            <div className="d-flex align-items-center border-bottom">
+            <div className="d-flex align-items-center w-100 border-bottom">
                 <div className="d-flex pr-2 py-2 pl-0 w-100 justify-content-between">
                     <div className="d-flex flex-column">
                         <p className="mb-0 max-text-size-190">User Name</p>

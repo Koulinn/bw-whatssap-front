@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import InputDefault from '../../../../../components/Login_Register_Shareable/InputDefault/InputDefault'
 import { useState } from 'react'
 import {AiOutlineSearch} from 'react-icons/ai'
 

@@ -1,7 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import UseGetUserData from '../../lib old/UseGetUserData'
-import requests from '../../lib old/request-handler'
 import HeaderLoginRegister from '../../components/Login_Register_Shareable/HeaderLoginRegister/HeaderLoginRegister'
 import { Container, Row } from 'react-bootstrap'
 import { DisplayLastChatsColumn } from './components/SmallColumn/DisplayLastChatsColumn'
@@ -11,6 +9,8 @@ import { EmptyState } from './components/LargeColumn/EmptyState/EmptyState'
 import { ChatRoomMenu } from './components/LargeColumn/ChatRoomMenu.jsx/ChatRoomMenu'
 import { ChatDisplay } from './components/LargeColumn/ChatDisplay/ChatDisplay'
 import ChatBg from '../../assets/imgs/whatssapBG.png'
+import BottomBar from './components/LargeColumn/ChatDisplay/BottomBar/BottomBar'
+
 
 
 export const AppPage = (props) => {
@@ -25,11 +25,12 @@ export const AppPage = (props) => {
                            
     
                         </div>
-                        <div id="chatDisplay" className="col-8 px-0 h-100" style={{backgroundImage: `url(${ChatBg})`}}>
+                        <div id="chatDisplay" className="col-8 overflow-hidden px-0 h-100 position-relative" style={{backgroundImage: `url(${ChatBg})`}}>
                         {/* <div className="col-8 px-0 h-100" style={{backgroundColor:'#f8f9fa'}}> */}
                             {/* <EmptyState/> */}
                             <ChatRoomMenu/>
                             <ChatDisplay/>
+                            <BottomBar/>
                         </div>
     
                     </Row>
