@@ -13,6 +13,7 @@ import { ChatDisplay } from './components/LargeColumn/ChatDisplay/ChatDisplay'
 import ChatBg from '../../assets/imgs/whatssapBG.png'
 import BottomBar from './components/LargeColumn/ChatDisplay/BottomBar/BottomBar'
 import { CreateRoom } from './components/SmallColumn/CreateRoom/CreateRoom'
+import { Profile } from './components/SmallColumn/Profile/Profile'
 
 
 const ADDRESS = 'http://localhost:3001'
@@ -102,8 +103,10 @@ const AppPage = (props) => {
                 <Container className=" px-0 bg-white register_login_border_shadow_position position-absolute">
                     <Row className="px-0 mx-0 w-100 h-100">
                         <div className="col-4 px-0 h-100">
+                            {/* Needs to create logic to display accordingly with the action that the user wants to perform */}
                             {/* <DisplayLastChatsColumn/> */}
-                            <CreateRoom/>
+                            {/* <CreateRoom/> */}
+                            <Profile />
                            
     
                         </div>

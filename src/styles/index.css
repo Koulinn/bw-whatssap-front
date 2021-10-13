@@ -33,6 +33,14 @@ input {
   height: calc(100vh - 48px);
 }
 
+
+.shadow-effect{
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
+}
+
+.bg-light-grey{
+  background-color: var(--main-bg-color-grey);
+}
 .bg-grey {
   background-color: var(--main-bg-color-dark);
 }
@@ -312,14 +320,14 @@ input {
 
 }
 
-#createRoom svg{
+#createRoom svg, #userProfile header svg{
   width: 24px;
   height: 24px;
   color: white;
   fill: white;
 }
 
-#createRoom h6 {
+#createRoom h6, #userProfile h6 {
   color: white;
 }
 
