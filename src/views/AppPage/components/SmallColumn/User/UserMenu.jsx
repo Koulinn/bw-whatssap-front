@@ -7,7 +7,7 @@ import {useState} from 'react'
 function UserMenu({avatar,setAppDisplayState, ...props}) {
     const [showMenuTab, setShowMenuTab] = useState(false)
 
-    console.log(props)
+    // console.log(props)
     return (
         <div className="d-flex justify-content-between align-items-center px-3 py-3 bg-grey borderRadiusLeft-18">
             

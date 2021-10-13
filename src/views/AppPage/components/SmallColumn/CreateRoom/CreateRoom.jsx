@@ -7,17 +7,18 @@ import UserCard from './UserCard/UserCard'
 import UserBadge from '../UserBadge/UserBadge'
 import CreateGroupBtn from './CreateGroupBtn/CreateGroupBtn'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 
-export const CreateRoom = ({setAppDisplayState, _id}) => {
+export const CreateRoom = ({setAppDisplayState}) => {
     const [userList, setUserList] = useState([])
+    const loggedUserId = useSelector(state => state.user.userData._id)
 
     const getAllUsers= async ()=>{
         try {
             
             const response=await axios.get(`${process.env.REACT_APP_PROD_API_URL}user`,{withCredentials: true})
             if(response.status === 200){
-                console.log(response)
                 setUserList(response.data)    
             } else {
                 console.log('else')
@@ -45,8 +46,8 @@ export const CreateRoom = ({setAppDisplayState, _id}) => {
                 <SearchContacs />
                 <div className="contacts-wrapper">
                     
-                    {userList.length > 0 ? userList.filter(user=> user._id !== _id)
-                    .map(user=> <UserCard key={user._id} name={user.name} bio={user.bio} user={user} setAppDisplayState={setAppDisplayState} />)
+                    {userList.length > 0 ? userList.filter(user=> user._id !== loggedUserId)
+                    .map(user=> <UserCard key={user._id} user={user} setAppDisplayState={setAppDisplayState} />)
                     : 'No users to show :('}
                     
                 </div>
@@ -57,10 +58,7 @@ export const CreateRoom = ({setAppDisplayState, _id}) => {
     )
 }
 
-const mapStateToProps = (state) => state.user.userData
 
-const mapDispatchToProps = {
 
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateRoom)
+export default CreateRoom
