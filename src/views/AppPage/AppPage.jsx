@@ -30,6 +30,7 @@ const AppPage = ({setUserData}) => {
         showCreateRoom: false,
         showDisplayLastChatsColumn: true
     })
+    const [ showCreateRoom, setShowCreateRoom] = useState(false)
 
     useEffect(() => {
         fetchMe()
@@ -111,12 +112,11 @@ const AppPage = ({setUserData}) => {
                 <Container className=" px-0 bg-white register_login_border_shadow_position position-absolute">
                     <Row className="px-0 mx-0 w-100 h-100">
                         <div className="col-4 px-0 h-100">
-                            {/* Needs to create logic to display accordingly with the action that the user wants to perform */}
+                  
                             { appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState}/> : ''}
                            { appDisplayState.showCreateRoom? <CreateRoom appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState}/>: ''}
                             {appDisplayState.showProfile? <Profile appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} />: ''}
                    
-                            {/* {showCreateRoom? <CreateRoom/>: <DisplayLastChatsColumn setShowCreateRoom={setShowCreateRoom}/>} */}
                        
                            
     
