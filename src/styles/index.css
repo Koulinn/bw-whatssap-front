@@ -33,6 +33,14 @@ input {
   height: calc(100vh - 48px);
 }
 
+
+.shadow-effect{
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
+}
+
+.bg-light-grey{
+  background-color: var(--main-bg-color-grey);
+}
 .bg-grey {
   background-color: var(--main-bg-color-dark);
 }
@@ -312,14 +320,14 @@ input {
 
 }
 
-#createRoom svg{
+#createRoom svg, #userProfile header svg{
   width: 24px;
   height: 24px;
   color: white;
   fill: white;
 }
 
-#createRoom h6 {
+#createRoom h6, #userProfile h6 {
   color: white;
 }
 
@@ -346,4 +354,50 @@ input {
   border: 2px solid;
   border-radius: 8px;
   border-color: var(--main-green-color-dark);
+}
+
+.userBadge{
+  background-color: var(--main-bg-color-dark);
+  border-radius: 200px;
+  color: grey;
+}
+.userBadge .icon-wrapper{
+  width: 24px;
+  height: 24px;
+}
+
+#createRoom .userBadge svg{
+  border-radius: 200px;
+  width: 16px;
+  height: 16px;
+  color: grey;
+  fill: grey;
+  stroke: grey;
+}
+#createRoom .create-group-icon svg{
+  border-radius: 200px;
+  width: 24px;
+  height: 24px;
+  color: var(--main-green-color-dark);
+  fill: var(--main-green-color-dark);
+  stroke: var(--main-green-color-dark);
+}
+.userBadge .icon-wrapper:hover{
+  background-color: gainsboro;
+  width: 24px;
+  height: 24px;
+
+}
+
+.create-group-wrapper{
+  cursor: pointer;
+}
+
+.create-group-wrapper>div{
+  transition: all .5s;
+}
+
+.create-group-wrapper>div:hover{
+  background-color: var(--bg-green-light);
+  border-radius: 18px;
 }
