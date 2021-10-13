@@ -25,6 +25,11 @@ const AppPage = ({setUserData}) => {
     const [onlineUsers, setOnlineUsers] = useState([])
     const [message, setMessage] = useState('')
     const [chatHistory, setChatHistory] = useState([])
+    const [appDisplayState, setAppDisplayState]= useState({
+        showProfile: false,
+        showCreateRoom: false,
+        showDisplayLastChatsColumn: true
+    })
 
     useEffect(() => {
         fetchMe()
@@ -107,19 +112,21 @@ const AppPage = ({setUserData}) => {
                     <Row className="px-0 mx-0 w-100 h-100">
                         <div className="col-4 px-0 h-100">
                             {/* Needs to create logic to display accordingly with the action that the user wants to perform */}
-                            {/* <DisplayLastChatsColumn/> */}
-                            {/* <CreateRoom/> */}
-                            <Profile />
+                            { appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState}/> : ''}
+                           { appDisplayState.showCreateRoom? <CreateRoom appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState}/>: ''}
+                            {appDisplayState.showProfile? <Profile appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} />: ''}
                            
     
                         </div>
                         <div id="chatDisplay" className="col-8 overflow-hidden px-0 h-100 position-relative" style={{backgroundImage: `url(${ChatBg})`}}>
-                        {/* <div className="col-8 px-0 h-100" style={{backgroundColor:'#f8f9fa'}}> */}
-                            {/* <EmptyState/> */}
                             <ChatRoomMenu/>
                             <ChatDisplay/>
                             <BottomBar/>
                         </div>
+                        {/* <div className="col-8 px-0 h-100" style={{backgroundColor:'#f8f9fa'}}> */}
+                            {/* <EmptyState/> 
+                            </div>    
+                        */}
     
                     </Row>
                 </Container>

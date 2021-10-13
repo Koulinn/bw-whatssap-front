@@ -5,7 +5,7 @@ import { MdArrowBack, MdOutlineEdit, MdOutlineCheck } from 'react-icons/md'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-export const Profile = () => {
+export const Profile = ({setAppDisplayState}) => {
     const [usernameEditMode, setUsernameEditMode] = useState(false)
     const [aboutEditMode, setAboutEditMode] = useState(false)
     const userData = useSelector(state=>state.user.userData)
@@ -16,7 +16,7 @@ export const Profile = () => {
     return (
         <div id="userProfile" className="d-flex flex-column h-100 bg-green-light ">
             <header className="d-flex" style={{ height: '149px' }}>
-                <ReturnMain icon={<MdArrowBack />} title="Profile" />
+                <ReturnMain setAppDisplayState={setAppDisplayState} icon={<MdArrowBack />} title="Profile" />
             </header>
             <div className="d-flex flex-column h-100 bg-grey ">
                 <div className="my-4">

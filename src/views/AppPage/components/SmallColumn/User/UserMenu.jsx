@@ -4,14 +4,18 @@ import { UserMenuTab } from './UserMenuTab/UserMenuTab'
 import {useState} from 'react'
 
 
-function UserMenu({avatar,...props}) {
+function UserMenu({avatar,setAppDisplayState,...props}) {
     const [showMenuTab, setShowMenuTab] = useState(false)
 
     console.log(props)
     return (
         <div className="d-flex justify-content-between align-items-center px-3 py-3 bg-grey borderRadiusLeft-18">
             
-                <div>
+                <div onClick={()=> setAppDisplayState({
+                    showProfile: true,
+                    showCreateRoom: false,
+                    showDisplayLastChatsColumn: false
+                })}>
                     <img className="avatar-my-profile" width="40" src={avatar} alt="" />
                 </div>
             
@@ -24,7 +28,7 @@ function UserMenu({avatar,...props}) {
                 </div>
                 <div className="icon-wrapper p-2 position-relative" onClick={()=>setShowMenuTab(!showMenuTab)}>
                     <svg viewBox="0 0 24 24" width="24" height="24" class=""><path fill="currentColor" d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"></path></svg>
-                    {showMenuTab? <UserMenuTab/> : ''}
+                    {showMenuTab? <UserMenuTab setAppDisplayState={setAppDisplayState}/> : ''}
                 </div>
             </div>
 

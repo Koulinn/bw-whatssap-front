@@ -7,11 +7,11 @@ import UserCard from './UserCard/UserCard'
 import UserBadge from '../UserBadge/UserBadge'
 import CreateGroupBtn from './CreateGroupBtn/CreateGroupBtn'
 
-export const CreateRoom = (props) => {
+export const CreateRoom = ({setAppDisplayState}) => {
     return (
         <div id="createRoom" className="d-flex flex-column h-100 bg-green-light ">
             <header className="d-flex" style={{ height: '149px' }}>
-                <ReturnMain icon={<MdArrowBack />} title="Add group participants" />
+                <ReturnMain icon={<MdArrowBack />} title="Add group participants" setAppDisplayState={setAppDisplayState} />
             </header>
             <div className="d-flex flex-column bg-white" style={{ height: '85.55%' }}>
                 <div className="d-flex align-items-center flex-wrap mt-3 px-3">
