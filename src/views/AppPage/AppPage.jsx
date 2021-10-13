@@ -115,6 +115,9 @@ const AppPage = ({setUserData}) => {
                             { appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState}/> : ''}
                            { appDisplayState.showCreateRoom? <CreateRoom appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState}/>: ''}
                             {appDisplayState.showProfile? <Profile appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} />: ''}
+                   
+                            {/* {showCreateRoom? <CreateRoom/>: <DisplayLastChatsColumn setShowCreateRoom={setShowCreateRoom}/>} */}
+                       
                            
     
                         </div>

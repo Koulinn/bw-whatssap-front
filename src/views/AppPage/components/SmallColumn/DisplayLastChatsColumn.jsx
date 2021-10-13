@@ -9,7 +9,7 @@ import UserMenu from './User/UserMenu'
 export const DisplayLastChatsColumn = ({setAppDisplayState}) => {
     return (
         <div className="d-flex flex-column h-100">
-            <UserMenu setAppDisplayState={setAppDisplayState} />
+            <UserMenu setAppDisplayState={setAppDisplayState} setAppDisplayState={setAppDisplayState}/>
             <Notification />
             <SearchBar />
             <RecentChatColumn/>

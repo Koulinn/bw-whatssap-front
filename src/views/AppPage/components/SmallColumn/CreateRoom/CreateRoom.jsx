@@ -40,9 +40,6 @@ export const CreateRoom = ({setAppDisplayState}) => {
                     <UserCard name="randomName" bio="I love cake" />
                     <UserCard name="randomName" bio="I love cake" />
                     <UserCard name="randomName" bio="I love cake" />
-
-
-
                 </div>
 
             </div>
