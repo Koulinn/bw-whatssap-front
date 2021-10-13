@@ -16,6 +16,7 @@ import { CreateRoom } from './components/SmallColumn/CreateRoom/CreateRoom'
 import { Profile } from './components/SmallColumn/Profile/Profile'
 import { setUserData } from '../../redux/actions'
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 
 const ADDRESS = process.env.REACT_APP_SOCKET_URL
@@ -24,13 +25,13 @@ export const socket = io(ADDRESS, { transports: ['websocket'] })
 const AppPage = ({ setUserData, ...props }) => {
     const history=useHistory()
     const userlocal=localStorage.getItem('persist:root');
-    console.log(userlocal,'localstoragecheck')
     if (userlocal) {
-
+        
     } else {
-      history.push("/login");
+        history.push("/login");
     }
-
+    
+    const loggedUserId = useSelector(s=>s.user.userData._id)
     const [appDisplayState, setAppDisplayState] = useState({
         showProfile: false,
         showCreateRoom: false,
@@ -40,6 +41,7 @@ const AppPage = ({ setUserData, ...props }) => {
     const [chatHistoryList, setChatHistoryList] = useState([])
     const [showCurrentChat, setCurrentChat] = useState(null)
     const [isLogged, setIsLogged] = useState(false)
+    const [isNewMessageCreated, setIsNewMessageCreated] = useState(false)
     
     useEffect(() => {
         fetchMe()
@@ -47,11 +49,16 @@ const AppPage = ({ setUserData, ...props }) => {
 
         socket.on('connect', () => {
             console.log('Socket Connection established!')
+            socket.emit('joinRooms', loggedUserId)
+
         })
 
         socket.on('roomCreated', (payload) => {
             setChatHistoryList((chatHistoryList) => [...chatHistoryList, payload])
+            console.log(payload, 'FOR NEW ROOMS')
+            socket.emit('joinRooms',loggedUserId )
         })
+        console.log(socket, '<<<socket')
 
         // //add new message to a room
         // let newMessage = {
@@ -72,32 +79,28 @@ const AppPage = ({ setUserData, ...props }) => {
         // }
         // socket.emit('deleteMessage',deleteMessage)
 
-        // socket.on('message', (newMessageJustReceived) => {
-        //     //   console.log("message received! let's post it in the window...")
-        //     //   console.log(newMessageJustReceived)
-        //     // this is happening on ALL clients apart from the one who sent the message!
-
-        //     console.log('OLD CHATHISTORY', chatHistory)
-
-        //     // BROKEN! the value of chatHistory is just taken initialle and never re-evaluated!
-        //     //   let newChatHistory = chatHistory.concat(newMessageJustReceived)
-        //     //   setChatHistory(newChatHistory)
-
-        //     // instead with this callback we're getting the most up-to-date value of chatHistory
-        //     // from the hook callback (it's re-evaluated every time!)
-        //     setChatHistory((chatHistory) => {
-        //         // console.log(chatHistory)
-        //         return [...chatHistory, newMessageJustReceived]
-        //     })
+        // socket.on('UpdateChatHistory', (newMessageJustReceived) => {
+        //     console.log(newMessageJustReceived, '<<NEW message received')
+        //     console.log(showCurrentChat, '<<showCurrentChat from updatedchathistory')
+      
+        //     // setCurrentChat((showCurrentChat) => {
+        //     //     return ({
+        //     //         ...showCurrentChat,
+        //     //         showCurrentChat.history: [...showCurrentChat.history, newMessageJustReceived]
+        //     //     })
+        //     // })
         // })
+
+
     }, [])
+
+    
 
 
     const fetchMe = async () => {
         try {
             const response = await axios.get(`${process.env.REACT_APP_PROD_API_URL}user/me`, { withCredentials: true })
             if (response.statusText === 'OK') {
-                console.log(response)
                 setUserData(response.data)
                 setIsLogged(true)
             } else {
@@ -144,8 +147,8 @@ const AppPage = ({ setUserData, ...props }) => {
                                 {showCurrentChat ?
                                     <div id="chatDisplay" className="col-8 overflow-hidden px-0 h-100 position-relative" style={{ backgroundImage: `url(${ChatBg})` }}>
                                         <ChatRoomMenu showCurrentChat={showCurrentChat} />
-                                        <ChatDisplay showCurrentChat={showCurrentChat} />
-                                        <BottomBar showCurrentChat={showCurrentChat} />
+                                        <ChatDisplay setCurrentChat={setCurrentChat} showCurrentChat={showCurrentChat} isNewMessageCreated />
+                                        <BottomBar showCurrentChat={showCurrentChat} isNewMessageCreated={isNewMessageCreated} setIsNewMessageCreated={setIsNewMessageCreated} />
                                     </div>
                                     : <div className="col-8 px-0 h-100" style={{ backgroundColor: '#f8f9fa' }}>
                                         <EmptyState />

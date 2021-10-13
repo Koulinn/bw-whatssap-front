@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 
 
-function BottomBar({showCurrentChat}) {
+function BottomBar({showCurrentChat, setIsNewMessageCreated, isNewMessageCreated }) {
     const loggedUserId = useSelector(s => s.user.userData._id)
 
 
@@ -20,6 +20,7 @@ function BottomBar({showCurrentChat}) {
                 roomId: showCurrentChat._id
             }
             socket.emit("newMessage", payload)
+            setIsNewMessageCreated(!setIsNewMessageCreated)
         } catch (error) {
             console.log(error)
         }

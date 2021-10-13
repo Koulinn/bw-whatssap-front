@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { ChatRoom } from './Components/ChatRoom/ChatRoom'
 
 export const RecentChatColumn = ({chatHistoryList, setCurrentChat}) => {
-    console.log(chatHistoryList, 'From RecentChat column component')
     return (
         <div id="recentChats" className="flex-grow-1 overflow-auto">
             <div className=" h-100">

@@ -1,14 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useSelector } from 'react-redux'
+import { socket } from '../../../../../AppPage'
+import { useState } from 'react'
 
 export const ChatRoom = ({chat, setCurrentChat, ...props}) => {
     const loggedUserId = useSelector(s=>s.user.userData._id)
     const chatMember = chat.members.filter(member=> member._id !== loggedUserId)[0]
+
     
    
     return (
-        <div className="d-flex pr-3" onClick={()=>setCurrentChat(chat)}>
+        <div className="d-flex pr-3" onClick={()=>{
+                // socket.emit('updateChatMessagesToTheReceiver', chat._id.toString())
+                // socket.on('sendAllChatMessages',(payload)=>{
+                //     console.log(payload, 'CHAT room payload')
+                //     setCurrentChat(payload)})
+                
+                setCurrentChat(chat)
+
+            
+            }}>
             <div className="p-3 ">
                 <img className="avatar-chat-room" src={chatMember.avatar} height='48' width="48" alt="" />
             </div>
