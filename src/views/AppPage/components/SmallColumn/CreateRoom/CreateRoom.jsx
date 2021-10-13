@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { connect } from 'react-redux'
 import { MdArrowBack } from 'react-icons/md'
 import ReturnMain from '../ShareableComp/ReturnMain'
@@ -6,8 +6,30 @@ import { SearchContacs } from '../ShareableComp/SearchContacs'
 import UserCard from './UserCard/UserCard'
 import UserBadge from '../UserBadge/UserBadge'
 import CreateGroupBtn from './CreateGroupBtn/CreateGroupBtn'
+import axios from 'axios'
 
-export const CreateRoom = ({setAppDisplayState}) => {
+
+export const CreateRoom = ({setAppDisplayState, _id}) => {
+    const [userList, setUserList] = useState([])
+
+    const getAllUsers= async ()=>{
+        try {
+            
+            const response=await axios.get(`${process.env.REACT_APP_PROD_API_URL}user`,{withCredentials: true})
+            if(response.status === 200){
+                console.log(response)
+                setUserList(response.data)    
+            } else {
+                console.log('else')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(()=>{
+        getAllUsers()
+    },[])
     return (
         <div id="createRoom" className="d-flex flex-column h-100 bg-green-light ">
             <header className="d-flex" style={{ height: '149px' }}>
@@ -16,30 +38,17 @@ export const CreateRoom = ({setAppDisplayState}) => {
             <div className="d-flex flex-column bg-white" style={{ height: '85.55%' }}>
                 <div className="d-flex align-items-center flex-wrap mt-3 px-3">
                     {/* Need to add logic for spacing and aligment */}
-                    <UserBadge name="random" />
+                    {/* <UserBadge name="random" /> */}
                 </div>
-                <CreateGroupBtn />
+                {/* <CreateGroupBtn /> */}
 
                 <SearchContacs />
                 <div className="contacts-wrapper">
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
-                    <UserCard name="randomName" bio="I love cake" />
+                    
+                    {userList.length > 0 ? userList.filter(user=> user._id !== _id)
+                    .map(user=> <UserCard key={user._id} name={user.name} bio={user.bio} user={user} setAppDisplayState={setAppDisplayState} />)
+                    : 'No users to show :('}
+                    
                 </div>
 
             </div>
@@ -48,9 +57,7 @@ export const CreateRoom = ({setAppDisplayState}) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-
-})
+const mapStateToProps = (state) => state.user.userData
 
 const mapDispatchToProps = {
 

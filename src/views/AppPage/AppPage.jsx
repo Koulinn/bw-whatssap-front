@@ -17,7 +17,7 @@ import { Profile } from './components/SmallColumn/Profile/Profile'
 import { setUserData } from '../../redux/actions'
 
 
-const ADDRESS = 'http://localhost:3003'
+const ADDRESS = process.env.REACT_APP_SOCKET_URL
 const socket = io(ADDRESS, { transports: ['websocket'] })
 
 const AppPage = ({setUserData}) => {
@@ -47,7 +47,7 @@ const AppPage = ({setUserData}) => {
 
         //create new room
         let users=["61644ebc5e91ee64d1dc84d0","61657ca76ec620b30da351fc"]
-        socket.emit('createRoom', users)
+        // socket.emit('createRoom', users)
         socket.on('roomCreated',(payload)=>{
             console.log('roomCreated',payload)
         })
@@ -58,7 +58,7 @@ const AppPage = ({setUserData}) => {
             userId:"61657ca76ec620b30da351fc",
             roomId:"61659a3c3e807fd0dd79bdd8"
         }
-        socket.emit('newMessage',newMessage)
+        // socket.emit('newMessage',newMessage)
         socket.on('UpdateChatHistory',(payload)=>{
             console.log('UpdateChatHistory',payload)
             setMessage(payload)
@@ -69,7 +69,7 @@ const AppPage = ({setUserData}) => {
             roomId:"61659a3c3e807fd0dd79bdd8",
             messageId:"6165a163c9353dbe3ec3b4df"
         }
-        socket.emit('deleteMessage',deleteMessage)
+        // socket.emit('deleteMessage',deleteMessage)
 
         socket.on('message', (newMessageJustReceived) => {
           //   console.log("message received! let's post it in the window...")
