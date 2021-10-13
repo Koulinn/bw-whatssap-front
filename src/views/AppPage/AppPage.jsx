@@ -15,13 +15,22 @@ import BottomBar from './components/LargeColumn/ChatDisplay/BottomBar/BottomBar'
 import { CreateRoom } from './components/SmallColumn/CreateRoom/CreateRoom'
 import { Profile } from './components/SmallColumn/Profile/Profile'
 import { setUserData } from '../../redux/actions'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 
 const ADDRESS = process.env.REACT_APP_SOCKET_URL
 export const socket = io(ADDRESS, { transports: ['websocket'] })
 
 const AppPage = ({ setUserData, ...props }) => {
+    const history=useHistory()
+    const userlocal=localStorage.getItem('persist:root');
+    console.log(userlocal,'localstoragecheck')
+    if (userlocal) {
+
+    } else {
+      history.push("/login");
+    }
+
     const [appDisplayState, setAppDisplayState] = useState({
         showProfile: false,
         showCreateRoom: false,
@@ -92,16 +101,10 @@ const AppPage = ({ setUserData, ...props }) => {
                 setUserData(response.data)
                 setIsLogged(true)
             } else {
-                // history.location('/login')
-                console.log(props, 'props from mainAPP')
-                props.history.push('/login')
-                console.log('fetche me else')
+            
             }
         } catch (error) {
             console.log(error)
-            console.log('catch fetchme')
-            console.log(props, 'props from mainAPP')
-            props.history.push('/login')
         }
     }
 

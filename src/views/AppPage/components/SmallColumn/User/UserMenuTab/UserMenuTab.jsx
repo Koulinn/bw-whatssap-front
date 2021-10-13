@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
+
 
 import {useHistory} from 'react-router-dom'
 
@@ -7,11 +9,23 @@ export const UserMenuTab = ({setAppDisplayState, ...props}) => {
     const history = useHistory()
 
     const logOut = async () => {
-        window.localStorage.clear()
-        console.log(props, 'from User menu')
-        history.push('/login')
+        // window.localStorage.clear()
+        // console.log(props, 'from User menu')
+        // history.push('/login')
 
         // props.history.push('/login')
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_PROD_API_URL}user/logout`, { withCredentials: true })
+            if (response.statusText === 'OK') {
+               console.log('logout success')
+               window.localStorage.clear()
+               history.push('/login')
+            } else {
+                console.log('fetche me else')
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <div id="userMenus" className="bg-white position-absolute py-3">
