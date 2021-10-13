@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-// export const setUserAccessToken = (payload)=>({
-//     type: 'SET_USER_TOKEN',
-//     payload: payload
-// })
+export const setUserData = (payload)=>({
+    type: 'SET_USER_DATA',
+    payload: payload
+})
 
 
 export const setUserLogin = (email,password,setRedirect)=>{

@@ -14,14 +14,13 @@ import ChatBg from '../../assets/imgs/whatssapBG.png'
 import BottomBar from './components/LargeColumn/ChatDisplay/BottomBar/BottomBar'
 import { CreateRoom } from './components/SmallColumn/CreateRoom/CreateRoom'
 import { Profile } from './components/SmallColumn/Profile/Profile'
+import { setUserData } from '../../redux/actions'
 
 
 const ADDRESS = 'http://localhost:3003'
 const socket = io(ADDRESS, { transports: ['websocket'] })
 
-const AppPage = (props) => {
-    // const data = UseGetUserData()
-    //const test = requests.login()
+const AppPage = ({setUserData}) => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [onlineUsers, setOnlineUsers] = useState([])
     const [message, setMessage] = useState('')
@@ -89,9 +88,8 @@ const AppPage = (props) => {
       const fetchMe = async () => {
         try {
         const response=await axios.get(`${process.env.REACT_APP_PROD_API_URL}user/me`,{withCredentials: true})
-        console.log('me requestttttttttttttttttttttttttttttttttttttttttttttttttt',response)
         if(response.statusText === 'OK'){
-            console.log('inside ok', response.data)
+            setUserData(response.data)
         } else {
             console.log('fetche me else')
         }
@@ -134,8 +132,9 @@ const mapStateToProps = (state) => ({
 
 })
 
-const mapDispatchToProps = {
+const mapDispatchToProps = (dispatch)=> ({
+    setUserData: (payload)=>dispatch(setUserData(payload))
 
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppPage)

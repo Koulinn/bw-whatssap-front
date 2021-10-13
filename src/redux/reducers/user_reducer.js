@@ -16,6 +16,7 @@ export const userReducer = (state = initialState.user, action) => {
             }
 
         case 'SET_USER_DATA':
+            console.log('INSIDE SET_USER_DATA', action)
             return {
                 ...state,
                 userData: {
