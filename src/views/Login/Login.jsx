@@ -8,7 +8,7 @@ import GoogleButton from 'react-google-button'
 import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { setUserToken,cookiesUserToken } from '../../redux/actions'
+import { setUserLogin,cookiesUserToken } from '../../redux/actions'
 import { useSelector,useDispatch } from 'react-redux'
 
 export const Login = (props) => {
@@ -41,12 +41,12 @@ export const Login = (props) => {
                             <InputDefault inputID='email' login={login} value={login.email}  handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
                             <InputDefault inputID='password' login={login} value={login.password}   handleInput={handleInput}  placeholderText='Enter your password' label="Password" />
                             <div className="col-8 d-flex pl-3 pt-5 mt-5 justify-content-center">
-                                <Button variant="success" onClick={()=>dispatch(setUserToken(email,password,setRedirect))}>Login</Button>
+                                <Button variant="success" onClick={()=>dispatch(setUserLogin(email,password,setRedirect))}>Login</Button>
                             </div>
 
                             <Divisor/>
                             <div className="col-8 d-flex justify-content-center">
-                              <a href="http://localhost:3001/user/googleLogin"> <GoogleButton className="googleBtn" /></a>
+                              <a href={`${process.env.REACT_APP_PROD_API_URL}user/googleLogin`}> <GoogleButton className="googleBtn" /></a>
                             </div>
 
                             <div className="col-8 d-flex justify-content-center mt-5">

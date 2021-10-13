@@ -14,12 +14,10 @@ const isEmpty = (param)=>{
     }
 }
 
-const setUserTokens = (tokens) => {
-}
+
 
 const tools= {
     isEmpty: isEmpty,
-    setUserTokens:setUserTokens
 }
 
 export default tools

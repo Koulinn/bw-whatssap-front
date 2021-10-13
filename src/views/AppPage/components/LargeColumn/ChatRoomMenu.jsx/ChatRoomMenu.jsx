@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { AiOutlineSearch } from 'react-icons/ai'
 import ChatStats from './ChatStats/ChatStats'
 
-export const ChatRoomMenu = (props) => {
+export const ChatRoomMenu = () => {
     return (
         <div className="d-flex justify-content-between align-items-center py-3 bg-grey chatMenu-wrapper">
             <ChatStats/>

@@ -8,12 +8,6 @@ export const userReducer = (state = initialState.user, action) => {
                 ...state,
                 isLogged: true
             }
-        case 'SET_USER_TOKEN':
-            console.log(action, 'from reducer')
-            return {
-                ...state,
-                userToken: action.payload,
-            }
 
         case 'SET_LOGGED_OUT':
             return {
@@ -22,6 +16,7 @@ export const userReducer = (state = initialState.user, action) => {
             }
 
         case 'SET_USER_DATA':
+            console.log('INSIDE SET_USER_DATA', action)
             return {
                 ...state,
                 userData: {

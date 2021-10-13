@@ -12,7 +12,6 @@ export const initialState = {
         isLogged: false,
         userData: {
         },
-        userToken: null,
     },
 }
 
