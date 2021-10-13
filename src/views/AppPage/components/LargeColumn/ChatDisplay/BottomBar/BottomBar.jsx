@@ -1,16 +1,38 @@
 import React from 'react'
 import InputMenu from './InputMenu/InputMenu'
+import { socket } from '../../../../AppPage'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 
 
-function BottomBar() {
+function BottomBar({showCurrentChat}) {
+    const loggedUserId = useSelector(s => s.user.userData._id)
+
+
+    const submitHandler = async(e)=>{
+        e.preventDefault()
+        const textMessage= e.target.textMessage.value
+        try {
+            const payload ={
+                message: textMessage,
+                userId: loggedUserId,
+                roomId: showCurrentChat._id
+            }
+            socket.emit("newMessage", payload)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div id="bottomBar-wrapper" className="form_input d-flex align-items-center bg-grey p-3 position-absolute" >
             <InputMenu/>
             <div className="bg-white w-100 d-flex align-items-center messageInput-wrapper">
-                <label htmlFor='messageInput' className="ml-2">
-                </label>
-                <input className="w-100" id="messageInput" type="text" placeholder='Type a message' onChange={(e) => console.log(e.target.value)} />
+                <form onSubmit={(e)=>submitHandler(e)}>
+                    <label htmlFor='messageInput' className="ml-2">
+                    </label>
+                    <input name="textMessage" className="w-100" id="messageInput" type="text" placeholder='Type a message' onChange={(e) => console.log(e.target.value)} />
+                </form>
             </div>
             <div className="">
                 <div className="pl-3 icon-wrapper">

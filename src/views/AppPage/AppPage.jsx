@@ -15,12 +15,13 @@ import BottomBar from './components/LargeColumn/ChatDisplay/BottomBar/BottomBar'
 import { CreateRoom } from './components/SmallColumn/CreateRoom/CreateRoom'
 import { Profile } from './components/SmallColumn/Profile/Profile'
 import { setUserData } from '../../redux/actions'
+import { Redirect } from 'react-router-dom'
 
 
 const ADDRESS = process.env.REACT_APP_SOCKET_URL
 export const socket = io(ADDRESS, { transports: ['websocket'] })
 
-const AppPage = ({ setUserData }) => {
+const AppPage = ({ setUserData, ...props }) => {
     const [appDisplayState, setAppDisplayState] = useState({
         showProfile: false,
         showCreateRoom: false,
@@ -29,7 +30,8 @@ const AppPage = ({ setUserData }) => {
     const [showCreateRoom, setShowCreateRoom] = useState(false)
     const [chatHistoryList, setChatHistoryList] = useState([])
     const [showCurrentChat, setCurrentChat] = useState(null)
-
+    const [isLogged, setIsLogged] = useState(false)
+    
     useEffect(() => {
         fetchMe()
         getLoggedUserChatHistory()
@@ -81,17 +83,25 @@ const AppPage = ({ setUserData }) => {
         // })
     }, [])
 
-    
+
     const fetchMe = async () => {
         try {
             const response = await axios.get(`${process.env.REACT_APP_PROD_API_URL}user/me`, { withCredentials: true })
             if (response.statusText === 'OK') {
+                console.log(response)
                 setUserData(response.data)
+                setIsLogged(true)
             } else {
+                // history.location('/login')
+                console.log(props, 'props from mainAPP')
+                props.history.push('/login')
                 console.log('fetche me else')
             }
         } catch (error) {
             console.log(error)
+            console.log('catch fetchme')
+            console.log(props, 'props from mainAPP')
+            props.history.push('/login')
         }
     }
 
@@ -110,44 +120,52 @@ const AppPage = ({ setUserData }) => {
 
 
     return (
-        <div className="container-fluid">
-            <Container>
-                <HeaderLoginRegister hideLogo={true} />
-                <Container className=" px-0 bg-white register_login_border_shadow_position position-absolute">
-                    <Row className="px-0 mx-0 w-100 h-100">
-                        <div className="col-4 px-0 h-100">
+        
+             
+                <div className="container-fluid">
+                    <Container>
+                        <HeaderLoginRegister hideLogo={true} />
+                        <Container className=" px-0 bg-white register_login_border_shadow_position position-absolute">
+                            <Row className="px-0 mx-0 w-100 h-100">
+                                <div className="col-4 px-0 h-100">
 
-                            {appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn chatHistoryList={chatHistoryList} appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} setCurrentChat={setCurrentChat}/> : ''}
-                            {appDisplayState.showCreateRoom ? <CreateRoom appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
-                            {appDisplayState.showProfile ? <Profile appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
-
-
-
-
-                        </div>
-
-                        {showCurrentChat ?
-                            <div id="chatDisplay" className="col-8 overflow-hidden px-0 h-100 position-relative" style={{ backgroundImage: `url(${ChatBg})` }}>
-                                <ChatRoomMenu showCurrentChat={showCurrentChat}  />
-                                <ChatDisplay showCurrentChat={showCurrentChat} />
-                                <BottomBar showCurrentChat={showCurrentChat} />
-                            </div>
-                            : <div className="col-8 px-0 h-100" style={{ backgroundColor: '#f8f9fa' }}>
-                                <EmptyState />
-                            </div>}
+                                    {appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn chatHistoryList={chatHistoryList} appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} setCurrentChat={setCurrentChat} /> : ''}
+                                    {appDisplayState.showCreateRoom ? <CreateRoom appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
+                                    {appDisplayState.showProfile ? <Profile appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
 
 
-                    </Row>
-                </Container>
-            </Container>
-        </div>
-    )
+
+
+                                </div>
+
+                                {showCurrentChat ?
+                                    <div id="chatDisplay" className="col-8 overflow-hidden px-0 h-100 position-relative" style={{ backgroundImage: `url(${ChatBg})` }}>
+                                        <ChatRoomMenu showCurrentChat={showCurrentChat} />
+                                        <ChatDisplay showCurrentChat={showCurrentChat} />
+                                        <BottomBar showCurrentChat={showCurrentChat} />
+                                    </div>
+                                    : <div className="col-8 px-0 h-100" style={{ backgroundColor: '#f8f9fa' }}>
+                                        <EmptyState />
+                                    </div>}
+
+
+                            </Row>
+                        </Container>
+                    </Container>
+                </div>
+                )
+                
+
+        
 }
 
+const mapToProps = s => ({
+
+})
 
 const mapDispatchToProps = (dispatch) => ({
     setUserData: (payload) => dispatch(setUserData(payload))
 
 })
 
-export default connect(mapDispatchToProps)(AppPage)
+export default connect(mapToProps, mapDispatchToProps)(AppPage)

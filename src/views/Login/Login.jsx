@@ -30,6 +30,8 @@ export const Login = (props) => {
         return <Redirect to='/'/>
     }
 
+   
+
     return (
         <div id="login">
             <HeaderLoginRegister />
@@ -64,5 +66,6 @@ export const Login = (props) => {
             </Container>
         </div>
     )
+
 }
 export default Login

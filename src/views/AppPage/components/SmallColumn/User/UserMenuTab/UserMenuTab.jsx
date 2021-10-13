@@ -1,7 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-export const UserMenuTab = ({setAppDisplayState}) => {
+import {useHistory} from 'react-router-dom'
+
+export const UserMenuTab = ({setAppDisplayState, ...props}) => {
+    const history = useHistory()
+
+    const logOut = async () => {
+        window.localStorage.clear()
+        console.log(props, 'from User menu')
+        history.push('/login')
+
+        // props.history.push('/login')
+    }
     return (
         <div id="userMenus" className="bg-white position-absolute py-3">
             <ul className="m-0 pl-0 px-3">
@@ -18,7 +29,7 @@ export const UserMenuTab = ({setAppDisplayState}) => {
                 <li className="mb-3 px-3">
                     Settings
                 </li>
-                <li className="mb-2 px-3">
+                <li className="mb-2 px-3" onClick={logOut}>
                     Log out
                 </li>
             </ul>
@@ -27,12 +38,6 @@ export const UserMenuTab = ({setAppDisplayState}) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    
-})
 
-const mapDispatchToProps = {
-    
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenuTab)
+export default UserMenuTab
