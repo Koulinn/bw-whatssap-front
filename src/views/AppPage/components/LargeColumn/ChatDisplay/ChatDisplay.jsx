@@ -1,27 +1,31 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import MyMessage from './MyMessage/MyMessage'
 import OtherMembersMessage from './OtherMembersMessage/OtherMembersMessage'
+import { useSelector } from 'react-redux'
 
-export const ChatDisplay = (props) => {
+export const ChatDisplay = ({showCurrentChat}) => {
+    const loggedUserId = useSelector(s=>s.user.userData._id)
+    
+    const {history} = showCurrentChat
     return (
         <div className="d-flex flex-column h-100 messages-wrapper">
-            <MyMessage/>
+           {history.map(message =>{
+               if(message.sender ===loggedUserId ){
+                return <MyMessage message={message}/>
+               }else{
+                return <OtherMembersMessage message={message} />
+               }
+           })}
+            {/* <MyMessage/>
             <OtherMembersMessage/>
             <MyMessage/>
             <OtherMembersMessage/>
             <MyMessage/>
-            <OtherMembersMessage/>
+            <OtherMembersMessage/> */}
         </div>
     )
 }
 
-const mapStateToProps = (state) => ({
-    
-})
 
-const mapDispatchToProps = {
-    
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatDisplay)
+export default ChatDisplay

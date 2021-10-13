@@ -6,13 +6,13 @@ import { SearchBar } from './User/SearchBar'
 import UserMenu from './User/UserMenu'
 
 
-export const DisplayLastChatsColumn = ({setAppDisplayState, chatHistoryList, ...props}) => {
+export const DisplayLastChatsColumn = ({setAppDisplayState, chatHistoryList, setCurrentChat, ...props}) => {
     return (
         <div className="d-flex flex-column h-100">
             <UserMenu  setAppDisplayState={setAppDisplayState}/>
             <Notification />
             <SearchBar />
-            <RecentChatColumn chatHistoryList={chatHistoryList}/>
+            <RecentChatColumn chatHistoryList={chatHistoryList} setCurrentChat={setCurrentChat}/>
         </div>
     )
 }

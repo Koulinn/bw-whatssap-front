@@ -28,6 +28,7 @@ const AppPage = ({ setUserData }) => {
     })
     const [showCreateRoom, setShowCreateRoom] = useState(false)
     const [chatHistoryList, setChatHistoryList] = useState([])
+    const [showCurrentChat, setCurrentChat] = useState(null)
 
     useEffect(() => {
         fetchMe()
@@ -38,7 +39,7 @@ const AppPage = ({ setUserData }) => {
         })
 
         socket.on('roomCreated', (payload) => {
-            setChatHistoryList((chatHistoryList)=>[...chatHistoryList, payload])
+            setChatHistoryList((chatHistoryList) => [...chatHistoryList, payload])
         })
 
         // //add new message to a room
@@ -80,6 +81,7 @@ const AppPage = ({ setUserData }) => {
         // })
     }, [])
 
+    
     const fetchMe = async () => {
         try {
             const response = await axios.get(`${process.env.REACT_APP_PROD_API_URL}user/me`, { withCredentials: true })
@@ -115,7 +117,7 @@ const AppPage = ({ setUserData }) => {
                     <Row className="px-0 mx-0 w-100 h-100">
                         <div className="col-4 px-0 h-100">
 
-                            {appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn chatHistoryList={chatHistoryList} appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
+                            {appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn chatHistoryList={chatHistoryList} appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} setCurrentChat={setCurrentChat}/> : ''}
                             {appDisplayState.showCreateRoom ? <CreateRoom appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
                             {appDisplayState.showProfile ? <Profile appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
 
@@ -123,15 +125,17 @@ const AppPage = ({ setUserData }) => {
 
 
                         </div>
-                        <div id="chatDisplay" className="col-8 overflow-hidden px-0 h-100 position-relative" style={{ backgroundImage: `url(${ChatBg})` }}>
-                            <ChatRoomMenu />
-                            <ChatDisplay />
-                            <BottomBar />
-                        </div>
-                        {/* <div className="col-8 px-0 h-100" style={{backgroundColor:'#f8f9fa'}}> */}
-                        {/* <EmptyState/> 
-                            </div>    
-                        */}
+
+                        {showCurrentChat ?
+                            <div id="chatDisplay" className="col-8 overflow-hidden px-0 h-100 position-relative" style={{ backgroundImage: `url(${ChatBg})` }}>
+                                <ChatRoomMenu showCurrentChat={showCurrentChat}  />
+                                <ChatDisplay showCurrentChat={showCurrentChat} />
+                                <BottomBar showCurrentChat={showCurrentChat} />
+                            </div>
+                            : <div className="col-8 px-0 h-100" style={{ backgroundColor: '#f8f9fa' }}>
+                                <EmptyState />
+                            </div>}
+
 
                     </Row>
                 </Container>

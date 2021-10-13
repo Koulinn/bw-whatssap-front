@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { AiOutlineSearch } from 'react-icons/ai'
 import ChatStats from './ChatStats/ChatStats'
 
-export const ChatRoomMenu = () => {
+export const ChatRoomMenu = ({showCurrentChat}) => {
     return (
         <div className="d-flex justify-content-between align-items-center py-3 bg-grey chatMenu-wrapper">
-            <ChatStats/>
+            <ChatStats showCurrentChat={showCurrentChat}/>
             <div className="d-flex justify-content-between align-items-center">
                 <div className="icon-wrapper mx-2 p-2">
                     <AiOutlineSearch />

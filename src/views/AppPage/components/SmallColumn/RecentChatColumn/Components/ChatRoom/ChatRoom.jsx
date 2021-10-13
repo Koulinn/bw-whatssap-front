@@ -2,13 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { useSelector } from 'react-redux'
 
-export const ChatRoom = ({chat, ...props}) => {
+export const ChatRoom = ({chat, setCurrentChat, ...props}) => {
     const loggedUserId = useSelector(s=>s.user.userData._id)
     const chatMember = chat.members.filter(member=> member._id !== loggedUserId)[0]
-    console.log(chatMember, 'ChatMember')
+    
    
     return (
-        <div className="d-flex pr-3">
+        <div className="d-flex pr-3" onClick={()=>setCurrentChat(chat)}>
             <div className="p-3 ">
                 <img className="avatar-chat-room" src={chatMember.avatar} height='48' width="48" alt="" />
             </div>
