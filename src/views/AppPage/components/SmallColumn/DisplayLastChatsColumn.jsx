@@ -9,7 +9,7 @@ import UserMenu from './User/UserMenu'
 export const DisplayLastChatsColumn = (props) => {
     return (
         <div className="d-flex flex-column h-100">
-            <UserMenu />
+            <UserMenu setShowCreateRoom={props.setShowCreateRoom}/>
             <Notification />
             <SearchBar />
             <RecentChatColumn/>

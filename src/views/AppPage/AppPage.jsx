@@ -26,6 +26,7 @@ const AppPage = (props) => {
     const [onlineUsers, setOnlineUsers] = useState([])
     const [message, setMessage] = useState('')
     const [chatHistory, setChatHistory] = useState([])
+    const [showCreateRoom,setShowCreateRoom]=useState(false)
 
     // useEffect(() => {
     //     fatchme()
@@ -104,7 +105,8 @@ const AppPage = (props) => {
                     <Row className="px-0 mx-0 w-100 h-100">
                         <div className="col-4 px-0 h-100">
                             {/* Needs to create logic to display accordingly with the action that the user wants to perform */}
-                            <DisplayLastChatsColumn/>
+                            {/* <DisplayLastChatsColumn setShowCreateRoom={setShowCreateRoom}/> */}
+                            {showCreateRoom? <CreateRoom/>: <DisplayLastChatsColumn setShowCreateRoom={setShowCreateRoom}/>}
                             {/* <CreateRoom/> */}
                             {/* <Profile /> */}
                            
