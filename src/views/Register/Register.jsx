@@ -1,24 +1,24 @@
 import React from 'react'
 import { Button, Container, Row } from 'react-bootstrap'
-import { connect } from 'react-redux'
 import HeaderLoginRegister from '../../components/Login_Register_Shareable/HeaderLoginRegister/HeaderLoginRegister'
 import { useState, useEffect } from 'react'
 import InputDefault from '../../components/Login_Register_Shareable/InputDefault/InputDefault'
 import GoogleButton from 'react-google-button'
 import SideImage from '../../components/Login_Register_Shareable/SideImage/SideImage'
 import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
-import { Redirect } from 'react-router'
 import { registerUser } from '../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router'
+
 
 export const Register = (props) => {
     const [register, setRegister] = useState({ name: '', password: '', email: '' })
-    const [redirect, setRedirect] = useState(false)
+    const isLogged = useSelector(state => state.user.isLogged)
+    const history = useHistory()
     const name = register.name
     const password = register.password
     const email = register.email
-    const state = useSelector(state => state)
     const dispatch = useDispatch()
 
 
@@ -31,9 +31,10 @@ export const Register = (props) => {
         )
     }
 
-    if (redirect) {
-        return <Redirect to='/' />
+    if(isLogged){
+        history.push('/')
     }
+
     return (
         <div id="register">
             <HeaderLoginRegister />
@@ -48,7 +49,7 @@ export const Register = (props) => {
                             <InputDefault inputID="email" value={register.email} handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
 
                             <div className="col-8 d-flex pl-3 pt-5 mt-5 justify-content-center">
-                                <Button variant="success" onClick={() => dispatch(registerUser(name, email, password, setRedirect))}>Create an account</Button>
+                                <Button variant="success" onClick={() => dispatch(registerUser(name, email, password))}>Create an account</Button>
                             </div>
 
                             <Divisor />

@@ -21,7 +21,7 @@ export const CreateRoom = ({setAppDisplayState}) => {
             if(response.status === 200){
                 setUserList(response.data)    
             } else {
-                console.log('else')
+               
             }
         } catch (error) {
             console.log(error)

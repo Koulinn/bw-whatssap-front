@@ -4,6 +4,7 @@ export const userReducer = (state = initialState.user, action) => {
 
     switch (action.type) {
         case 'SET_LOGGED_IN':
+            
             return {
                 ...state,
                 isLogged: true

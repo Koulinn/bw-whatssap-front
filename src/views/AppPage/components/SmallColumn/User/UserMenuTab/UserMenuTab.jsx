@@ -1,12 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import axios from 'axios'
-
-
+import { useDispatch } from 'react-redux'
 import {useHistory} from 'react-router-dom'
+import { setUserLoggedOut } from '../../../../../../redux/actions'
 
 export const UserMenuTab = ({setAppDisplayState, ...props}) => {
     const history = useHistory()
+    const dispatch = useDispatch()
 
     const logOut = async () => {
         // window.localStorage.clear()
@@ -18,10 +18,11 @@ export const UserMenuTab = ({setAppDisplayState, ...props}) => {
             const response = await axios.get(`${process.env.REACT_APP_PROD_API_URL}user/logout`, { withCredentials: true })
             if (response.statusText === 'OK') {
                console.log('logout success')
+               dispatch(setUserLoggedOut())
                window.localStorage.clear()
                history.push('/login')
             } else {
-                console.log('fetche me else')
+               
             }
         } catch (error) {
             console.log(error)

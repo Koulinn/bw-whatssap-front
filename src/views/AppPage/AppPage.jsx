@@ -23,11 +23,14 @@ const ADDRESS = process.env.REACT_APP_SOCKET_URL
 export const socket = io(ADDRESS, { transports: ['websocket'] })
 
 const AppPage = ({ setUserData, setUserAllRooms, ...props }) => {
+    const isUserLogged = useSelector(s=>s.user.isLogged)
     const history=useHistory()
-    const userlocal=localStorage.getItem('persist:root');
-    if (userlocal) {
+  
+    if (isUserLogged) {
         
+      
     } else {
+     
         history.push("/login");
     }
     const dispatch = useDispatch()
@@ -45,6 +48,7 @@ const AppPage = ({ setUserData, setUserAllRooms, ...props }) => {
     const [isNewMessageCreated, setIsNewMessageCreated] = useState(false)
     
     useEffect(() => {
+    
         fetchMe()
         getLoggedUserChatHistory()
 
@@ -124,7 +128,7 @@ const AppPage = ({ setUserData, setUserAllRooms, ...props }) => {
                 setChatHistoryList(response.data)
                 setUserAllRooms(response.data)
             } else {
-                console.log('fetche me else')
+              
             }
         } catch (error) {
             console.log(error)
