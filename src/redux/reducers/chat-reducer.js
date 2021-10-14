@@ -8,6 +8,11 @@ export const chatReducer = (state = initialState.chat, action) => {
                 ...state,
                 allChatsRooms: action.payload
             }
+        case 'SET_TOGGLE_REQUEST':
+            return {
+                ...state,
+                toggleRequest: !state.toggleRequest
+            }
         case 'SET_NEW_ROOM':
             return {
                 ...state,

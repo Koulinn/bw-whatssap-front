@@ -15,7 +15,8 @@ export const initialState = {
     },
     chat:{
         allChatsRooms:[],
-        roomDisplayed: []
+        roomDisplayed: [],
+        toggleRequest: false
     }
 }
 

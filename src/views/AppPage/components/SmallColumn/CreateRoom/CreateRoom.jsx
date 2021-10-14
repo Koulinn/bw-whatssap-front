@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { MdArrowBack } from 'react-icons/md'
 import ReturnMain from '../ShareableComp/ReturnMain'
@@ -8,29 +8,36 @@ import UserBadge from '../UserBadge/UserBadge'
 import CreateGroupBtn from './CreateGroupBtn/CreateGroupBtn'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { socket } from '../../../AppPage'
 
 
-export const CreateRoom = ({setAppDisplayState}) => {
+export const CreateRoom = ({ setAppDisplayState }) => {
     const [userList, setUserList] = useState([])
     const loggedUserId = useSelector(state => state.user.userData._id)
 
-    const getAllUsers= async ()=>{
+    const getAllUsers = async () => {
         try {
-            
-            const response=await axios.get(`${process.env.REACT_APP_PROD_API_URL}user`,{withCredentials: true})
-            if(response.status === 200){
-                setUserList(response.data)    
+
+            const response = await axios.get(`${process.env.REACT_APP_PROD_API_URL}user`, { withCredentials: true })
+            if (response.status === 200) {
+                setUserList(response.data)
             } else {
-               
+
             }
         } catch (error) {
             console.log(error)
         }
     }
 
-    useEffect(()=>{
+    socket.on('existentRoom',()=>{ 
+        console.log('inside existentRoom')
+        
+        alert('You already have a room with that user')})
+
+    useEffect(() => {
         getAllUsers()
-    },[])
+    }, [])
+
     return (
         <div id="createRoom" className="d-flex flex-column h-100 bg-green-light ">
             <header className="d-flex" style={{ height: '149px' }}>
@@ -45,11 +52,11 @@ export const CreateRoom = ({setAppDisplayState}) => {
 
                 <SearchContacs />
                 <div className="contacts-wrapper">
-                    
-                    {userList.length > 0 ? userList.filter(user=> user._id !== loggedUserId)
-                    .map(user=> <UserCard key={user._id} user={user} setAppDisplayState={setAppDisplayState} />)
-                    : 'No users to show :('}
-                    
+
+                    {userList.length > 0 ? userList.filter(user => user._id !== loggedUserId)
+                        .map(user => <UserCard key={user._id} user={user} setAppDisplayState={setAppDisplayState} />)
+                        : 'No users to show :('}
+
                 </div>
 
             </div>
