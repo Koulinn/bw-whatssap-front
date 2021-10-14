@@ -14,7 +14,7 @@ function UserCard({ user, setAppDisplayState, ...props }) {
         setAppDisplayState({
             showProfile: false,
             showCreateRoom: false,
-            showDisplayLastChatsColumn: true
+            showDisplayLastChatsColumn: true,
         })
 
     }

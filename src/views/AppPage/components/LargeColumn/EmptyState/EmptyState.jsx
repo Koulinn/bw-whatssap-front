@@ -12,7 +12,7 @@ export const EmptyState = (props) => {
                 <div>
                     <h1 className="mt-5 text-center">Talk with your friends</h1>
                 </div>
-                <div class="mt-3">
+                <div className="mt-3">
                     <small className="text-center">WhatsApp connects to your phone to sync messages. To reduce data usage, connect your phone to Wi-Fi.</small>
                 </div>
             </div>

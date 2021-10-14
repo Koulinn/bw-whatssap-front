@@ -5,8 +5,6 @@ import { Container, Row } from 'react-bootstrap'
 import { DisplayLastChatsColumn } from './components/SmallColumn/DisplayLastChatsColumn'
 import { io } from 'socket.io-client'
 import axios from 'axios'
-import { SearchBar } from './components/SmallColumn/User/SearchBar'
-import { Notification } from './components/SmallColumn/User/Notification'
 import { EmptyState } from './components/LargeColumn/EmptyState/EmptyState'
 import { ChatRoomMenu } from './components/LargeColumn/ChatRoomMenu.jsx/ChatRoomMenu'
 import { ChatDisplay } from './components/LargeColumn/ChatDisplay/ChatDisplay'
@@ -16,13 +14,15 @@ import { CreateRoom } from './components/SmallColumn/CreateRoom/CreateRoom'
 import { Profile } from './components/SmallColumn/Profile/Profile'
 import { setUserData } from '../../redux/actions'
 import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setNewRoom, setUserAllRooms } from '../../redux/actions/chat-actions'
+import {updateCurrentRoomMessage} from '../../redux/actions/chat-actions.js'
 
 
 const ADDRESS = process.env.REACT_APP_SOCKET_URL
 export const socket = io(ADDRESS, { transports: ['websocket'] })
 
-const AppPage = ({ setUserData, ...props }) => {
+const AppPage = ({ setUserData, setUserAllRooms, ...props }) => {
     const history=useHistory()
     const userlocal=localStorage.getItem('persist:root');
     if (userlocal) {
@@ -30,6 +30,7 @@ const AppPage = ({ setUserData, ...props }) => {
     } else {
         history.push("/login");
     }
+    const dispatch = useDispatch()
     
     const loggedUserId = useSelector(s=>s.user.userData._id)
     const [appDisplayState, setAppDisplayState] = useState({
@@ -37,9 +38,9 @@ const AppPage = ({ setUserData, ...props }) => {
         showCreateRoom: false,
         showDisplayLastChatsColumn: true
     })
-    const [showCreateRoom, setShowCreateRoom] = useState(false)
+    const [showChatComponent, setShowChatComponent]= useState(false)
+    
     const [chatHistoryList, setChatHistoryList] = useState([])
-    const [showCurrentChat, setCurrentChat] = useState(null)
     const [isLogged, setIsLogged] = useState(false)
     const [isNewMessageCreated, setIsNewMessageCreated] = useState(false)
     
@@ -54,12 +55,17 @@ const AppPage = ({ setUserData, ...props }) => {
         })
 
         socket.on('roomCreated', (payload) => {
-            setChatHistoryList((chatHistoryList) => [...chatHistoryList, payload])
-            console.log(payload, 'FOR NEW ROOMS')
+            
+            dispatch(setNewRoom(payload))
+            // setChatHistoryList((chatHistoryList) => [...chatHistoryList, payload])
+            // console.log(payload, 'FOR NEW ROOMS')
             socket.emit('joinRooms',loggedUserId )
         })
         console.log(socket, '<<<socket')
 
+        socket.on('UpdateChatHistory', newlyReceivedMessage =>{
+            console.log('Inside updateChatHistory event', newlyReceivedMessage)
+            dispatch(updateCurrentRoomMessage(newlyReceivedMessage))})
         // //add new message to a room
         // let newMessage = {
         //     message: "Hello world",
@@ -116,6 +122,7 @@ const AppPage = ({ setUserData, ...props }) => {
             const response = await axios.get(`${process.env.REACT_APP_PROD_API_URL}chat/chatByUser`, { withCredentials: true })
             if (response.statusText === 'OK') {
                 setChatHistoryList(response.data)
+                setUserAllRooms(response.data)
             } else {
                 console.log('fetche me else')
             }
@@ -135,7 +142,7 @@ const AppPage = ({ setUserData, ...props }) => {
                             <Row className="px-0 mx-0 w-100 h-100">
                                 <div className="col-4 px-0 h-100">
 
-                                    {appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn chatHistoryList={chatHistoryList} appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} setCurrentChat={setCurrentChat} /> : ''}
+                                    {appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn chatHistoryList={chatHistoryList} appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} setShowChatComponent={setShowChatComponent} /> : ''}
                                     {appDisplayState.showCreateRoom ? <CreateRoom appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
                                     {appDisplayState.showProfile ? <Profile appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
 
@@ -144,11 +151,11 @@ const AppPage = ({ setUserData, ...props }) => {
 
                                 </div>
 
-                                {showCurrentChat ?
+                                {showChatComponent ?
                                     <div id="chatDisplay" className="col-8 overflow-hidden px-0 h-100 position-relative" style={{ backgroundImage: `url(${ChatBg})` }}>
-                                        <ChatRoomMenu showCurrentChat={showCurrentChat} />
-                                        <ChatDisplay setCurrentChat={setCurrentChat} showCurrentChat={showCurrentChat} isNewMessageCreated />
-                                        <BottomBar showCurrentChat={showCurrentChat} isNewMessageCreated={isNewMessageCreated} setIsNewMessageCreated={setIsNewMessageCreated} />
+                                        <ChatRoomMenu  />
+                                        <ChatDisplay  />
+                                        <BottomBar  isNewMessageCreated={isNewMessageCreated} setIsNewMessageCreated={setIsNewMessageCreated} />
                                     </div>
                                     : <div className="col-8 px-0 h-100" style={{ backgroundColor: '#f8f9fa' }}>
                                         <EmptyState />
@@ -170,7 +177,8 @@ const mapToProps = s => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    setUserData: (payload) => dispatch(setUserData(payload))
+    setUserData: (payload) => dispatch(setUserData(payload)),
+    setUserAllRooms: (payload) => dispatch(setUserAllRooms(payload))
 
 })
 

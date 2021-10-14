@@ -235,6 +235,8 @@ input {
 }
 .messages-wrapper {
   overflow-y: scroll;
+  height:81%;
+
 }
 
 .chatMenu-wrapper {

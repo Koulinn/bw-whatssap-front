@@ -13,10 +13,15 @@ export const initialState = {
         userData: {
         },
     },
+    chat:{
+        allChatsRooms:[],
+        roomDisplayed: []
+    }
 }
 
 export const groupedReducers = combineReducers({
     user: reducerLib.userReducer,
+    chat: reducerLib.chatReducer,
 })
 
 
