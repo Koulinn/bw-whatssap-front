@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux'
-import { useState, useEffect } from 'react';
 import store from '../redux/store'
-import { setUserRefreshToken, setUserAccessToken } from '../redux/actions';
+import { setUserRefreshToken } from '../redux/actions';
 
 
 const isEmpty = (param)=>{
@@ -16,14 +14,10 @@ const isEmpty = (param)=>{
     }
 }
 
-const setUserTokens = (tokens) => {
-    store.dispatch(setUserRefreshToken(tokens.refreshToken))
-    store.dispatch(setUserAccessToken(tokens.accessToken))
-}
+
 
 const tools= {
     isEmpty: isEmpty,
-    setUserTokens:setUserTokens
 }
 
 export default tools

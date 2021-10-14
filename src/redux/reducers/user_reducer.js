@@ -8,17 +8,6 @@ export const userReducer = (state = initialState.user, action) => {
                 ...state,
                 isLogged: true
             }
-        case 'SET_USER_ACCESS_TOKEN':
-            console.log(action, 'from reducer')
-            return {
-                ...state,
-                userAccessToken: action.payload,
-            }
-        case 'SET_USER_REFRESH_TOKEN':
-            return {
-                ...state,
-                userRefreshToken: action.payload
-            }
 
         case 'SET_LOGGED_OUT':
             return {

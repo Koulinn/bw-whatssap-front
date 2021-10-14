@@ -2,7 +2,7 @@ import axios from 'axios';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import { useSelector } from 'react-redux'
 import store from '../redux/store'
-import { setUserToken } from '../redux/actions';
+import { setUserLogin } from '../redux/actions';
 import tools from './tools.js'
 
 const login = async (bode) => {
@@ -14,7 +14,7 @@ const login = async (bode) => {
         }
         const serverResponse = await axios.post(process.env.REACT_APP_PROD_API_URL + 'users/login', { body })
         if(serverResponse.status === 200){
-            tools.setUserTokens(serverResponse.data)
+            tools.setUserLogin(serverResponse.data)
 
         } else {
             console.log('else')

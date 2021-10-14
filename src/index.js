@@ -13,11 +13,11 @@ import { Container } from 'react-bootstrap';
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate persistor={persistor}>
-      <Container fluid>
+    {/* <PersistGate persistor={persistor}> */}
+      <Container className="m-0 p-0 position-relative" fluid>
         <App />
       </Container>
-    </PersistGate>
+    {/* </PersistGate> */}
   </Provider>
   ,
   document.getElementById('root')
