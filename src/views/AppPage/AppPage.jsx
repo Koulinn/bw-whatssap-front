@@ -47,6 +47,9 @@ const AppPage = ({ setUserData, setUserAllRooms, ...props }) => {
     const [isLogged, setIsLogged] = useState(false)
     const [isNewMessageCreated, setIsNewMessageCreated] = useState(false)
     
+    window.onbeforeunload=()=>{
+        // socket.emit('disconnect')
+    }
     useEffect(() => {
     
         fetchMe()
