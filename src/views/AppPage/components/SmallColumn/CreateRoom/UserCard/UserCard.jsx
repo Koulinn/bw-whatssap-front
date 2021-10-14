@@ -1,13 +1,16 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { socket } from '../../../../AppPage'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setNewRoom } from '../../../../../../redux/actions/chat-actions.js'
 
 
 function UserCard({ user, setAppDisplayState, ...props }) {
     const [isSelected, setIsSelected] = useState(false)
     const loggedUserId = useSelector(state => state.user.userData._id)
     const users = [user._id, loggedUserId]
+    const allOpenRooms = useSelector(s => s.chat.allChatsRooms)
+    const dispatch = useDispatch()
 
     const createNewRoom = () => {
         socket.emit('createRoom', users)
@@ -18,6 +21,8 @@ function UserCard({ user, setAppDisplayState, ...props }) {
         })
 
     }
+
+
 
     return (
         <div className="d-flex pr-3" onClick={() => { createNewRoom() }}>

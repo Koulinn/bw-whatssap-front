@@ -13,13 +13,6 @@ export const ChatDisplay = () => {
     const toggleRequest = useSelector(s => s.chat.toggleRequest)
     const dispatch = useDispatch()
 
-    useEffect(()=>{
-        socket.on('UpdateChatHistory', payload=>{
-            dispatch(setToggleRequest())
-            dispatch(updateCurrentRoomMessage(payload))
-            console.log(payload, 'new message')
-        })
-    },[toggleRequest])
 
 
     

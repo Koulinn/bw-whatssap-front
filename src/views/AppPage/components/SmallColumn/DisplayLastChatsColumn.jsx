@@ -12,14 +12,6 @@ import {socket} from '../../../AppPage/AppPage'
 export const DisplayLastChatsColumn = ({setAppDisplayState, chatHistoryList, setCurrentChat, setShowChatComponent, ...props}) => {
     const toggleRequest = useSelector(s => s.chat.toggleRequest)
     const dispatch= useDispatch()
-    useEffect(()=>{
-        socket.on('NewRoomCreated', async (payload)=>{
-            dispatch(setToggleRequest())
-            console.log('newroomcreated', payload)
-            dispatch(setNewRoom(payload))
-        })
-
-    },[toggleRequest])
 
    
     return (

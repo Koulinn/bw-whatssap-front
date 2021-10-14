@@ -29,10 +29,6 @@ export const CreateRoom = ({ setAppDisplayState }) => {
         }
     }
 
-    socket.on('existentRoom',()=>{ 
-        console.log('inside existentRoom')
-        
-        alert('You already have a room with that user')})
 
     useEffect(() => {
         getAllUsers()

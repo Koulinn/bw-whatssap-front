@@ -22,9 +22,10 @@ import { setNewRoom, setToggleRequest, setUserAllRooms, updateCurrentRoomMessage
 const ADDRESS = process.env.REACT_APP_SOCKET_URL
 export const socket = io(ADDRESS, { transports: ['websocket'] })
 
-const AppPage = ({ setUserData, setUserAllRooms, ...props }) => {
+const AppPage = ({ setUserData, setUserAllRooms }) => {
     const isUserLogged = useSelector(s => s.user.isLogged)
     const toggleRequest = useSelector(s => s.chat.toggleRequest)
+    const allOpenRooms = useSelector(s => s.chat.allChatsRooms)
     const history = useHistory()
 
     if (isUserLogged) {
@@ -51,70 +52,53 @@ const AppPage = ({ setUserData, setUserAllRooms, ...props }) => {
     //     // socket.emit('disconnect')
     // }
     useEffect(() => {
-        if (!isUserLogged){
+        if (!isUserLogged) {
 
-            
         } else {
 
             fetchMe()
             getLoggedUserChatHistory()
             console.log('inside useEffect')
             socket.on('connect', () => {
-                console.log('Socket Connection established!')    
+                console.log('Socket Connection established!')
             })
             socket.emit('joinPreExistingRooms', loggedUserId)
         }
 
 
-        // socket.on('roomCreated', (payload) => {
-
-        //     dispatch(setNewRoom(payload))
-        //     // setChatHistoryList((chatHistoryList) => [...chatHistoryList, payload])
-        //     // console.log(payload, 'FOR NEW ROOMS')
-        //     socket.emit('joinRooms',loggedUserId )
-        // })
-        // console.log(socket, '<<<socket')
-
-        // socket.on('UpdateChatHistory', newlyReceivedMessage =>{
-        //     console.log('Inside updateChatHistory event', newlyReceivedMessage)
-        //     dispatch(updateCurrentRoomMessage(newlyReceivedMessage))})
-        // //add new message to a room
-        // let newMessage = {
-        //     message: "Hello world",
-        //     userId: "61657ca76ec620b30da351fc",
-        //     roomId: "61659a3c3e807fd0dd79bdd8"
-        // }
-        // // socket.emit('newMessage',newMessage)
-        // socket.on('UpdateChatHistory', (payload) => {
-        //     // console.log('UpdateChatHistory', payload)
-        //     setMessage(payload)
-        // })
-
-        //delete a message from room
-        // let deleteMessage = {
-        //     roomId: "61659a3c3e807fd0dd79bdd8",
-        //     messageId: "6165a163c9353dbe3ec3b4df"
-        // }
-        // socket.emit('deleteMessage',deleteMessage)
-
-        // socket.on('UpdateChatHistory', (newMessageJustReceived) => {
-        //     console.log(newMessageJustReceived, '<<NEW message received')
-        //     console.log(showCurrentChat, '<<showCurrentChat from updatedchathistory')
-
-        //     // setCurrentChat((showCurrentChat) => {
-        //     //     return ({
-        //     //         ...showCurrentChat,
-        //     //         showCurrentChat.history: [...showCurrentChat.history, newMessageJustReceived]
-        //     //     })
-        //     // })
-        // })
-
-
     }, [])
 
-   
+    useEffect(() => {
+        const newRoomCreatedHandler = async (payload) => {
+            console.log(payload._id, 'NEW ROOM ID')
+            console.log(allOpenRooms, 'ALL OPEN ROOMS')
+            dispatch(setNewRoom(payload))
+        }
+
+        socket.on('NewRoomCreated', newRoomCreatedHandler)
+
+        return () => {
+            socket.off('NewRoomCreated', newRoomCreatedHandler)
+        }
+    }, [])
 
 
+    useEffect(() => {
+        socket.on('UpdateChatHistory', payload => {
+            // dispatch(setToggleRequest())
+            dispatch(updateCurrentRoomMessage(payload))
+            console.log(payload, 'new message')
+        })
+    }, [])
+
+    useEffect(() => {
+        socket.on('existentRoom', () => {
+            console.log('inside existentRoom')
+
+            alert('You already have a room with that user')
+        })
+
+    }, [])
 
 
     const fetchMe = async () => {
