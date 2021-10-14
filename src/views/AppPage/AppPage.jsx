@@ -57,14 +57,16 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
         if (!isUserLogged) {
 
         } else {
-
+            
             fetchMe()
+           
             getLoggedUserChatHistory()
             console.log('inside useEffect')
             socket.on('connect', () => {
                 console.log('Socket Connection established!')
             })
-            socket.emit('joinPreExistingRooms', loggedUserId)
+            console.log(loggedUserId, 'veriicar ID to useer logado')
+            // socket.emit('joinPreExistingRooms', loggedUserId)
         }
 
 
@@ -126,6 +128,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
             const response = await axios.get(`${process.env.REACT_APP_PROD_API_URL}user/me`, { withCredentials: true })
             if (response.statusText === 'OK') {
                 setUserData(response.data)
+                socket.emit('joinPreExistingRooms', response.data._id)
             } else {
 
             }
