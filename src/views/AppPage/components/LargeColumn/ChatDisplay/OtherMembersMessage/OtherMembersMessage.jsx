@@ -1,7 +1,10 @@
 import React from 'react'
+import {format, parseISO} from 'date-fns'
 
 function OtherMembersMessage({ message }) {
-    const { text, media } = message.content
+    const { text, media, createdAt } = message.content
+    
+    // const convertedTime = createdAt ? format(parseISO(createdAt), 'H:mm'): 'now'
     return (
         <div className="w-50 otherMemberMessage ml-3  mt-3 p-3 position-relative">
             <div className="d-flex flex-column w-100">
@@ -12,7 +15,7 @@ function OtherMembersMessage({ message }) {
                     {text ? <p className="mb-3 mt-2">{text}</p> : ''}
                 </div>
             </div>
-            <span className="position-absolute myMessage-time">{message.createdAt}</span>
+            <span className="position-absolute myMessage-time">{createdAt}</span>
 
         </div>
     )

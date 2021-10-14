@@ -1,24 +1,25 @@
 import React from 'react'
 import { Button, Container, Row } from 'react-bootstrap'
-import { connect } from 'react-redux'
 import HeaderLoginRegister from '../../components/Login_Register_Shareable/HeaderLoginRegister/HeaderLoginRegister'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import InputDefault from '../../components/Login_Register_Shareable/InputDefault/InputDefault'
 import GoogleButton from 'react-google-button'
 import Divisor from '../../components/Login_Register_Shareable/Divisor/Divisor'
-import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { setUserLogin,cookiesUserToken } from '../../redux/actions'
+import { setUserLogin } from '../../redux/actions'
 import { useSelector,useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
 
-export const Login = (props) => {
+export const Login = () => {
     const [login, setLogin] = useState({email:'',password:''})
-    const [redirect, setRedirect] = useState(false)
+    const history = useHistory()
+    const isLogged = useSelector(state => state.user.isLogged)
+    const dispatch = useDispatch()
+
+
     const email = login.email
     const password = login.password
 
-    const state = useSelector(state => state)
-    const dispatch = useDispatch()
 
     const handleInput = (key,value)=>{
         setLogin(
@@ -26,8 +27,8 @@ export const Login = (props) => {
           [key]:value}
           )}
 
-    if(redirect){
-        return <Redirect to='/'/>
+    if(isLogged){
+        history.push('/')
     }
 
    
@@ -43,7 +44,7 @@ export const Login = (props) => {
                             <InputDefault inputID='email' login={login} value={login.email}  handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
                             <InputDefault inputID='password' login={login} value={login.password}   handleInput={handleInput}  placeholderText='Enter your password' label="Password" />
                             <div className="col-8 d-flex pl-3 pt-5 mt-5 justify-content-center">
-                                <Button variant="success" onClick={()=>dispatch(setUserLogin(email,password,setRedirect))}>Login</Button>
+                                <Button variant="success" onClick={()=>dispatch(setUserLogin(email,password))}>Login</Button>
                             </div>
 
                             <Divisor/>

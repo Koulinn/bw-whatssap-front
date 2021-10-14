@@ -7,6 +7,9 @@ export const setUserAllRooms = (payload) => ({
     type: 'SET_USER_ALL_ROOMS',
     payload: payload
 })
+export const setToggleRequest = () => ({
+    type: 'SET_TOGGLE_REQUEST',
+})
 
 export const setRoomToDisplay = (payload) => ({
     type: 'SET_ROOM_TO_DISPLAY',

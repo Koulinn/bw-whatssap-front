@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import AppPage from './views/AppPage/AppPage';
 import Login from './views/Login/Login';
+import OAuthAccess from './views/OAuthAccess/OAuthAccess';
 import Register from './views/Register/Register';
 
 
@@ -18,6 +19,9 @@ function App() {
           
           <Route path="/" exact render={(routerProps) =>
             <AppPage {...routerProps} />}>
+          </Route>
+          <Route path="/OauthAccess" exact render={(routerProps) =>
+            <OAuthAccess {...routerProps} />}>
           </Route>
 
 

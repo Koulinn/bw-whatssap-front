@@ -5,37 +5,37 @@ export const setUserData = (payload) => ({
   payload: payload
 })
 
+export const setUserLogged = (payload) => ({
+  type: 'SET_LOGGED_IN',
+})
+export const setUserLoggedOut = (payload) => ({
+  type: 'SET_LOGGED_OUT',
+  payload: payload
+})
 
-export const setUserLogin = (email, password, setRedirect) => {
+
+export const setUserLogin = (email, password) => {
 
   return async (dispatch, getState) => {
     const baseUrl = `${process.env.REACT_APP_PROD_API_URL}user/login`
+    
     try {
       let response = await axios.post(baseUrl, { email: email, password: password }, { withCredentials: true })
       if (response.status === 200) {
-
-        setRedirect(true)
-        // dispatch({
-        //   type: 'SET_USER_TOKEN',
-        //   payload: response.data
-        // })
+        
         dispatch({
           type: 'SET_LOGGED_IN',
-          payload: true,
         })
       } else {
         dispatch({
-          type: 'SET_LOGGED_IN',
-          payload: false,
+          type: 'SET_LOGGED_OUT',
         })
-        setRedirect(false)
+
       }
     } catch (error) {
       dispatch({
-        type: 'SET_LOGGED_IN',
-        payload: false,
+        type: 'SET_LOGGED_OUT',
       })
-      setRedirect(false)
     }
   }
 }
@@ -46,32 +46,19 @@ export const registerUser = (name, email, password, setRedirect) => {
     try {
       let response = await axios.post(baseUrl, { name: name, email: email, password: password }, { withCredentials: true })
       if (response.status === 200) {
-        setRedirect(true)
-        // dispatch({
-        //     type: 'SET_USER_TOKEN',
-        //     payload: response.data
-        // })
+    
         dispatch({
           type: 'SET_LOGGED_IN',
-          payload: true,
         })
       } else {
         dispatch({
-          type: 'SET_LOGGED_IN',
-          payload: false,
+          type: 'SET_LOGGED_OUT',
         })
       }
     } catch (error) {
       dispatch({
-        type: 'SET_LOGGED_IN',
-        payload: false,
+        type: 'SET_LOGGED_OUT',
       })
     }
-  }
-}
-
-export const cookiesUserToken = () => {
-  return async (dispatch, getState) => {
-
   }
 }

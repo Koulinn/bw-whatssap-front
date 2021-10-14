@@ -1,7 +1,8 @@
 import React from 'react'
 import InputMenu from './InputMenu/InputMenu'
 import { socket } from '../../../../AppPage'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateCurrentRoomMessage } from '../../../../../../redux/actions/chat-actions.js'
 
 
 
@@ -9,19 +10,28 @@ import { useSelector } from 'react-redux'
 function BottomBar({ setIsNewMessageCreated }) {
     const loggedUserId = useSelector(s => s.user.userData._id)
     const currentChatId = useSelector(s => s.chat.roomDisplayed._id)
-    
+    const dispatch = useDispatch()
 
 
     const submitHandler = async (e) => {
         e.preventDefault()
         const textMessage = e.target.textMessage.value
+        var currentdate = new Date();
         try {
             const payload = {
                 message: textMessage,
                 userId: loggedUserId,
-                roomId: currentChatId
+                roomId: currentChatId,
+            }
+
+            const messageObject = {
+                sender: loggedUserId,
+                content: {
+                    text: textMessage,
+                }
             }
             socket.emit("newMessage", payload)
+            dispatch(updateCurrentRoomMessage(messageObject))
             setIsNewMessageCreated(!setIsNewMessageCreated)
         } catch (error) {
             console.log(error)
