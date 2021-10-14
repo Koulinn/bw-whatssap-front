@@ -2,7 +2,7 @@ import React from 'react'
 import InputMenu from './InputMenu/InputMenu'
 import { socket } from '../../../../AppPage'
 import { useSelector, useDispatch } from 'react-redux'
-import {updateCurrentRoomMessage} from '../../../../../../redux/actions/chat-actions.js'
+import { updateCurrentRoomMessage } from '../../../../../../redux/actions/chat-actions.js'
 
 
 
@@ -16,11 +16,12 @@ function BottomBar({ setIsNewMessageCreated }) {
     const submitHandler = async (e) => {
         e.preventDefault()
         const textMessage = e.target.textMessage.value
+        var currentdate = new Date();
         try {
             const payload = {
                 message: textMessage,
                 userId: loggedUserId,
-                roomId: currentChatId
+                roomId: currentChatId,
             }
 
             const messageObject = {

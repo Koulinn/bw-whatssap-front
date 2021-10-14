@@ -11,11 +11,12 @@ import { ChatDisplay } from './components/LargeColumn/ChatDisplay/ChatDisplay'
 import ChatBg from '../../assets/imgs/whatssapBG.png'
 import BottomBar from './components/LargeColumn/ChatDisplay/BottomBar/BottomBar'
 import { CreateRoom } from './components/SmallColumn/CreateRoom/CreateRoom'
+import {CreateGroup} from './components/SmallColumn/CreateGroup/CreateGroup'
 import { Profile } from './components/SmallColumn/Profile/Profile'
 import { setUserData } from '../../redux/actions'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { setNewRoom, setToggleRequest, setUserAllRooms, updateCurrentRoomMessage } from '../../redux/actions/chat-actions'
+import { setNewRoom, setRoomToDisplay, setToggleRequest, setUserAllRooms, updateCurrentRoomMessage } from '../../redux/actions/chat-actions'
 
 
 
@@ -41,7 +42,8 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
     const [appDisplayState, setAppDisplayState] = useState({
         showProfile: false,
         showCreateRoom: false,
-        showDisplayLastChatsColumn: true
+        showDisplayLastChatsColumn: true,
+        showCreateGroup:false
     })
     const [showChatComponent, setShowChatComponent] = useState(false)
 
@@ -84,11 +86,29 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
 
 
     useEffect(() => {
-        socket.on('UpdateChatHistory', payload => {
+        const upDateChatHistoryHandler = payload => {
             // dispatch(setToggleRequest())
             dispatch(updateCurrentRoomMessage(payload))
             console.log(payload, 'new message')
-        })
+        }
+        socket.on('UpdateChatHistory', upDateChatHistoryHandler)
+
+        return () => {
+            socket.off('UpdateChatHistory', upDateChatHistoryHandler)
+        }
+    }, [])
+
+
+    useEffect(() => {
+        const updateChatRoomToDisplayHandler = payload => {
+            // dispatch(setToggleRequest())setRoomToDisplay
+            dispatch(setRoomToDisplay(payload))
+            console.log(payload, 'Room to display message')
+        }
+        socket.on('updateChatRoom', updateChatRoomToDisplayHandler)
+        return () => {
+            socket.off('updateChatRoom', updateChatRoomToDisplayHandler)
+        }
     }, [])
 
     useEffect(() => {
@@ -141,6 +161,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
 
                             {appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn chatHistoryList={chatHistoryList} appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} setShowChatComponent={setShowChatComponent} /> : ''}
                             {appDisplayState.showCreateRoom ? <CreateRoom appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
+                            {appDisplayState.showCreateGroup ? <CreateGroup appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
                             {appDisplayState.showProfile ? <Profile appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
 
 

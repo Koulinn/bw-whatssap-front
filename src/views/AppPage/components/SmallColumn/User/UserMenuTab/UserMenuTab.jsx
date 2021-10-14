@@ -30,8 +30,9 @@ export const UserMenuTab = ({ setAppDisplayState, ...props }) => {
             <ul className="m-0 pl-0 px-3">
                 <li className="mt-2 px-3" onClick={() => setAppDisplayState({
                     showProfile: false,
-                    showCreateRoom: true,
-                    showDisplayLastChatsColumn: false
+                    showCreateRoom: false,
+                    showDisplayLastChatsColumn: false,
+                    showCreateGroup: true
                 })}>
                     New group
                 </li>

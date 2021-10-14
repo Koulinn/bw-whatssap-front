@@ -11,14 +11,19 @@ export const ChatRoom = ({ chat, setShowChatComponent }) => {
     const chatMember = chat.members.filter(member => member._id !== loggedUserId)[0]
 
 
+    const connectToRoom = ()=> {
+        console.log('inside connect to room')
+        socket.emit('connectToSelectedRoom', chat._id )
+    }
 
 
     return (
         <div className="d-flex pr-3" onClick={() => {
             dispatch(setRoomToDisplay(chat))
             setShowChatComponent(true)
+            connectToRoom()
         }}>
-            <div className="p-3 ">
+            <div className="p-3">
                 <img className="avatar-chat-room" src={chatMember.avatar} height='48' width="48" alt="" />
             </div>
             <div className="d-flex align-items-center w-100 border-bottom">
