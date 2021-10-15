@@ -67,7 +67,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
             socket.on('connect', () => {
                 console.log('Socket Connection established!')
             })
-            console.log(loggedUserId, 'veriicar ID to useer logado')
+            console.log(loggedUserId, 'check ID to Logged user')
             // socket.emit('joinPreExistingRooms', loggedUserId)
         }
 
@@ -91,7 +91,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
 
     useEffect(() => {
         const upDateChatHistoryHandler = ({roomId, saveMessage }) => {
-            // dispatch(setToggleRequest())
+            console.log(saveMessage, 'save message')
             console.log(roomId, 'should be equal do displayed room id', currentDisplayedChatID)
             if(roomId === currentDisplayedChatID ){
                 dispatch(updateCurrentRoomMessage(saveMessage))
@@ -134,7 +134,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
             const response = await axios.get(`${process.env.REACT_APP_PROD_API_URL}user/me`, { withCredentials: true })
             if (response.statusText === 'OK') {
                 setUserData(response.data)
-                socket.emit('joinPreExistingRooms', response.data._id)
+                socket.emit('joinPreExistingRooms', response.data._id || loggedUserId)
             } else {
 
             }
