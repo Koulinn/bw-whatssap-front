@@ -10,6 +10,7 @@ export const ChatRoom = ({ chat, setShowChatComponent }) => {
     const dispatch = useDispatch()
     const chatMember = chat.members.filter(member => member._id !== loggedUserId)[0]
 
+    const isGroup = chat.members.length > 2
 
     const connectToRoom = ()=> {
         console.log('inside connect to room')
@@ -24,13 +25,13 @@ export const ChatRoom = ({ chat, setShowChatComponent }) => {
             connectToRoom()
         }}>
             <div className="p-3">
-                <img className="avatar-chat-room" src={chatMember.avatar} height='48' width="48" alt="" />
+                <img className="avatar-chat-room" src={isGroup ? 'group' :chatMember.avatar} height='48' width="48" alt="" />
             </div>
             <div className="d-flex align-items-center w-100 border-bottom">
                 <div className="d-flex pr-2 py-2 pl-0 w-100 justify-content-between">
                     <div className="d-flex flex-column">
 
-                        <p className="mb-0 max-text-size-190">{chatMember.name}</p>
+                        <p className="mb-0 max-text-size-190">{isGroup ? `You and ${chat.members.length}` : chatMember.name}</p>
                         <p className="mb-0 text-truncate text-secondary max-text-size-190"><small>{chatMember.bio ? chatMember.bio : 'Last Message'}</small></p>
                     </div>
                     <div className="d-flex flex-column">
