@@ -9,7 +9,7 @@ function OAuthAccess() {
     const dispatch = useDispatch()
     const history = useHistory()
     useEffect(()=> {
-        console.log('inside use Effect')
+        
         dispatch(setUserLogged()) },[])
 
     if(isLogged){

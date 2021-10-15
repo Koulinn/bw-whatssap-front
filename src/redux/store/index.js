@@ -26,8 +26,8 @@ export const groupedReducers = combineReducers({
     chat: reducerLib.chatReducer,
 })
 
-const reducerExpireDate =  20000
-// const reducerExpireDate = 48 * 60 * 60 * 1000
+
+const reducerExpireDate = 48 * 60 * 60 * 1000
 const configPersistance = {
     key: 'root',
     storage,

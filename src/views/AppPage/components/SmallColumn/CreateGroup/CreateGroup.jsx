@@ -33,7 +33,7 @@ export const CreateGroup = ({ setAppDisplayState }) => {
     useEffect(() => {
         getAllUsers()
     }, [])
-    console.log(selectedUsers, 'selectedUsers user has been clicked')
+    
     return (
         <div id="CreateGroup" className="d-flex flex-column h-100 bg-green-light ">
             <header className="d-flex" style={{ height: '149px' }}>

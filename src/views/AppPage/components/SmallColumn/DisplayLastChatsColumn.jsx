@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setToggleRequest, setNewRoom } from '../../../../redux/actions/chat-actions'
 import {socket} from '../../../AppPage/AppPage'
 
-export const DisplayLastChatsColumn = ({setAppDisplayState, chatHistoryList, setCurrentChat, setShowChatComponent, ...props}) => {
+export const DisplayLastChatsColumn = ({setAppDisplayState, chatHistoryList, setCurrentChat, setShowChatComponent, setSetCurrentDisplayedChatID, ...props}) => {
     const toggleRequest = useSelector(s => s.chat.toggleRequest)
     const dispatch= useDispatch()
 
@@ -19,7 +19,7 @@ export const DisplayLastChatsColumn = ({setAppDisplayState, chatHistoryList, set
             <UserMenu  setAppDisplayState={setAppDisplayState}/>
             <Notification />
             <SearchBar />
-            <RecentChatColumn chatHistoryList={chatHistoryList} setCurrentChat={setCurrentChat} setAppDisplayState={setAppDisplayState} setShowChatComponent={setShowChatComponent}/>
+            <RecentChatColumn setSetCurrentDisplayedChatID={setSetCurrentDisplayedChatID}  chatHistoryList={chatHistoryList} setCurrentChat={setCurrentChat} setAppDisplayState={setAppDisplayState} setShowChatComponent={setShowChatComponent}/>
         </div>
     )
 }

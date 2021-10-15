@@ -27,7 +27,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
     const isUserLogged = useSelector(s => s.user.isLogged)
     const toggleRequest = useSelector(s => s.chat.toggleRequest)
     const allOpenRooms = useSelector(s => s.chat.allChatsRooms)
-    const currentDisplayedChatID = useSelector(s => s.chat.roomDisplayed._id)
+    const [currentDisplayedChatID, setSetCurrentDisplayedChatID ] = useState('')
     const history = useHistory()
 
     if (isUserLogged) {
@@ -63,12 +63,10 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
             fetchMe()
 
             getLoggedUserChatHistory()
-            console.log('inside useEffect')
+          
             socket.on('connect', () => {
                 console.log('Socket Connection established!')
             })
-            console.log(loggedUserId, 'check ID to Logged user')
-            // socket.emit('joinPreExistingRooms', loggedUserId)
         }
 
 
@@ -76,8 +74,6 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
 
     useEffect(() => {
         const newRoomCreatedHandler = async (payload) => {
-            console.log(payload._id, 'NEW ROOM ID')
-            console.log(allOpenRooms, 'ALL OPEN ROOMS')
             dispatch(setNewRoom(payload))
         }
 
@@ -91,8 +87,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
 
     useEffect(() => {
         const upDateChatHistoryHandler = ({roomId, saveMessage }) => {
-            console.log(saveMessage, 'save message')
-            console.log(roomId, 'should be equal do displayed room id', currentDisplayedChatID)
+          
             if(roomId === currentDisplayedChatID ){
                 dispatch(updateCurrentRoomMessage(saveMessage))
                 beep.play()
@@ -104,14 +99,13 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
         return () => {
             socket.off('UpdateChatHistory', upDateChatHistoryHandler)
         }
-    }, [])
+    }, [currentDisplayedChatID])
 
 
     useEffect(() => {
         const updateChatRoomToDisplayHandler = payload => {
-            // dispatch(setToggleRequest())setRoomToDisplay
             dispatch(setRoomToDisplay(payload))
-            console.log(payload, 'Room to display message')
+          
         }
         socket.on('updateChatRoom', updateChatRoomToDisplayHandler)
         return () => {
@@ -121,7 +115,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
 
     useEffect(() => {
         socket.on('existentRoom', () => {
-            console.log('inside existentRoom')
+          
 
             alert('You already have a room with that user')
         })
@@ -168,7 +162,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
                     <Row className="px-0 mx-0 w-100 h-100">
                         <div className="col-4 px-0 h-100">
 
-                            {appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn chatHistoryList={chatHistoryList} appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} setShowChatComponent={setShowChatComponent} /> : ''}
+                            {appDisplayState.showDisplayLastChatsColumn ? <DisplayLastChatsColumn setSetCurrentDisplayedChatID={setSetCurrentDisplayedChatID} chatHistoryList={chatHistoryList} appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} setShowChatComponent={setShowChatComponent} /> : ''}
                             {appDisplayState.showCreateRoom ? <CreateRoom appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
                             {appDisplayState.showCreateGroup ? <CreateGroup appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
                             {appDisplayState.showProfile ? <Profile appDisplayState={appDisplayState} setAppDisplayState={setAppDisplayState} /> : ''}
