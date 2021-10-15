@@ -3,11 +3,18 @@ import {MdCheck } from 'react-icons/md'
 import { socket } from '../../../../AppPage'
 
 
-function CreateGroupBtn(selectedUsersId) {
+function CreateGroupBtn({selectedUsersId, setAppDisplayState}) {
     //create onlcick with an emit and also change the appstate do return to the main state
     const createGroup =()=>{
-        console.log('From create group I can access the selected users',selectedUsersId.selectedUsersId)
-        socket.emit('createRoom', selectedUsersId.selectedUsersId)
+        console.log('From create group I can access the selected users',selectedUsersId)
+        socket.emit('createRoom', selectedUsersId)
+        setAppDisplayState({
+            showProfile: false,
+            showCreateRoom: false,
+            showDisplayLastChatsColumn: true,
+            showCreateGroup: false
+        })
+
         //const users = [user._id, selectedUsers]
     }
 
