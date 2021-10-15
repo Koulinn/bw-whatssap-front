@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage'
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import reducerLib from '../reducers/index.js'
+import expireReducer from 'redux-persist-expire'
 
 
 
@@ -25,7 +26,8 @@ export const groupedReducers = combineReducers({
     chat: reducerLib.chatReducer,
 })
 
-
+const reducerExpireDate =  20000
+// const reducerExpireDate = 48 * 60 * 60 * 1000
 const configPersistance = {
     key: 'root',
     storage,
@@ -33,6 +35,9 @@ const configPersistance = {
         encryptTransform({
             secretKey: process.env.REACT_APP_REDUX_STORAGE_SECRET_KEY
         }),
+        expireReducer('user', {
+            expireSeconds: reducerExpireDate
+        })
     ]
 }
 
