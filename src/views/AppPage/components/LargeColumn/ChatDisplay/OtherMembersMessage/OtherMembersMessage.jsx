@@ -9,6 +9,7 @@ function OtherMembersMessage({ message }) {
         <div className="w-50 otherMemberMessage ml-3  mt-3 p-3 position-relative">
             <div className="d-flex flex-column w-100">
                 <div className="d-flex flex-column w-100">
+                    
                     {media ? <div>
                         <img src={media} alt="" />
                     </div> : ''}

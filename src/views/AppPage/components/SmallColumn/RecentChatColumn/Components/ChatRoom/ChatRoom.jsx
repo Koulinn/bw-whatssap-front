@@ -11,7 +11,9 @@ export const ChatRoom = ({ chat, setShowChatComponent }) => {
     const chatMember = chat.members.filter(member => member._id !== loggedUserId)[0]
 
     const isGroup = chat.members.length > 2
+    const genericGroupImage= 'https://thumbs.dreamstime.com/z/line-users-group-icon-isolated-grey-background-people-business-avatar-symbol-profile-colorful-outline-concept-vector-194065612.jpg'
 
+    const groupImage= chat.image? chat.image : genericGroupImage
     const connectToRoom = ()=> {
         console.log('inside connect to room')
         socket.emit('connectToSelectedRoom', chat._id )
@@ -25,7 +27,7 @@ export const ChatRoom = ({ chat, setShowChatComponent }) => {
             connectToRoom()
         }}>
             <div className="p-3">
-                <img className="avatar-chat-room" src={isGroup ? 'group' :chatMember.avatar} height='48' width="48" alt="" />
+                <img className="avatar-chat-room" src={isGroup ? groupImage : chatMember.avatar} height='48' width="48" alt="" />
             </div>
             <div className="d-flex align-items-center w-100 border-bottom">
                 <div className="d-flex pr-2 py-2 pl-0 w-100 justify-content-between">

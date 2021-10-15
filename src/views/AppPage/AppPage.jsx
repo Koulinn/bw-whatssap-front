@@ -17,8 +17,8 @@ import { setUserData } from '../../redux/actions'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNewRoom, setRoomToDisplay, setToggleRequest, setUserAllRooms, updateCurrentRoomMessage } from '../../redux/actions/chat-actions'
-
-
+import soundNotf from '../../assets/notSound/notsound.mp3'
+import UIfx from 'uifx'
 
 const ADDRESS = process.env.REACT_APP_SOCKET_URL
 export const socket = io(ADDRESS, { transports: ['websocket'] })
@@ -27,6 +27,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
     const isUserLogged = useSelector(s => s.user.isLogged)
     const toggleRequest = useSelector(s => s.chat.toggleRequest)
     const allOpenRooms = useSelector(s => s.chat.allChatsRooms)
+    const currentDisplayedChatID = useSelector(s => s.chat.roomDisplayed._id)
     const history = useHistory()
 
     if (isUserLogged) {
@@ -50,9 +51,10 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
     const [chatHistoryList, setChatHistoryList] = useState([])
     const [isNewMessageCreated, setIsNewMessageCreated] = useState(false)
 
-    // window.onbeforeunload=()=>{
-    //     // socket.emit('disconnect')
-    // }
+      
+        const beep = new UIfx(soundNotf)
+      
+  
     useEffect(() => {
         if (!isUserLogged) {
 
@@ -88,10 +90,14 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
 
 
     useEffect(() => {
-        const upDateChatHistoryHandler = payload => {
+        const upDateChatHistoryHandler = ({roomId, saveMessage }) => {
             // dispatch(setToggleRequest())
-            dispatch(updateCurrentRoomMessage(payload))
-            console.log(payload, 'new message')
+            console.log(roomId, 'should be equal do displayed room id', currentDisplayedChatID)
+            if(roomId === currentDisplayedChatID ){
+                dispatch(updateCurrentRoomMessage(saveMessage))
+                beep.play()
+            }
+            
         }
         socket.on('UpdateChatHistory', upDateChatHistoryHandler)
 
