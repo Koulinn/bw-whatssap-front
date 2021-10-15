@@ -11,7 +11,7 @@ import { ChatDisplay } from './components/LargeColumn/ChatDisplay/ChatDisplay'
 import ChatBg from '../../assets/imgs/whatssapBG.png'
 import BottomBar from './components/LargeColumn/ChatDisplay/BottomBar/BottomBar'
 import { CreateRoom } from './components/SmallColumn/CreateRoom/CreateRoom'
-import {CreateGroup} from './components/SmallColumn/CreateGroup/CreateGroup'
+import { CreateGroup } from './components/SmallColumn/CreateGroup/CreateGroup'
 import { Profile } from './components/SmallColumn/Profile/Profile'
 import { setUserData } from '../../redux/actions'
 import { useHistory } from 'react-router-dom'
@@ -43,7 +43,7 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
         showProfile: false,
         showCreateRoom: false,
         showDisplayLastChatsColumn: true,
-        showCreateGroup:false
+        showCreateGroup: false
     })
     const [showChatComponent, setShowChatComponent] = useState(false)
 
@@ -57,9 +57,9 @@ const AppPage = ({ setUserData, setUserAllRooms }) => {
         if (!isUserLogged) {
 
         } else {
-            
+
             fetchMe()
-           
+
             getLoggedUserChatHistory()
             console.log('inside useEffect')
             socket.on('connect', () => {
