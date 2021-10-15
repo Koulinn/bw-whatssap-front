@@ -44,12 +44,12 @@ export const Register = (props) => {
                         <div className="col-8">
                             <h2 className="mb-5">Register</h2>
 
-                            <InputDefault inputID="name" value={register.name} handleInput={handleInput} placeholderText='Enter your name' label="Name" />
-                            <InputDefault inputID="password" value={register.password} handleInput={handleInput} placeholderText='Enter your password' label="Password" />
-                            <InputDefault inputID="email" value={register.email} handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
+                            <InputDefault inputID="name" value={register.name} handleInput={handleInput} type="text" placeholderText='Enter your name' label="Name" />
+                            <InputDefault inputID="email" value={register.email} handleInput={handleInput} type="text" placeholderText='Enter your email' label="E-mail" />
+                            <InputDefault inputID="password" value={register.password} handleInput={handleInput} type="password" placeholderText='Enter your password' label="Password" />
 
                             <div className="col-8 d-flex pl-3 pt-5 mt-5 justify-content-center">
-                                <Button variant="success" onClick={() => dispatch(registerUser(name, email, password))}>Create an account</Button>
+                                <Button variant="success" onClick={() => dispatch(registerUser({name, email, password}))}>Create an account</Button>
                             </div>
 
                             <Divisor />

@@ -33,6 +33,7 @@ function BottomBar({ setIsNewMessageCreated }) {
             socket.emit("newMessage", payload)
             dispatch(updateCurrentRoomMessage(messageObject))
             setIsNewMessageCreated(!setIsNewMessageCreated)
+            e.target.textMessage.value = ''
         } catch (error) {
             console.log(error)
         }

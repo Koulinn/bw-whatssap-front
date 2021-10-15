@@ -41,8 +41,8 @@ export const Login = () => {
                     <Row className="p-5  bg-white register_login_border_shadow_translate">
                         <div className="col-8">
                             <h2 className="mb-5">Login</h2>
-                            <InputDefault inputID='email' login={login} value={login.email}  handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
-                            <InputDefault inputID='password' login={login} value={login.password}   handleInput={handleInput}  placeholderText='Enter your password' label="Password" />
+                            <InputDefault inputID='email' login={login} value={login.email} type="text" handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
+                            <InputDefault inputID='password' login={login} value={login.password} type="text"   handleInput={handleInput}  placeholderText='Enter your password' label="Password" />
                             <div className="col-8 d-flex pl-3 pt-5 mt-5 justify-content-center">
                                 <Button variant="success" onClick={()=>dispatch(setUserLogin(email,password))}>Login</Button>
                             </div>

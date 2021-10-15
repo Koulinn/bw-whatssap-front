@@ -26,24 +26,24 @@ export const groupedReducers = combineReducers({
 })
 
 
-// const configPersistance = {
-//     key: 'root',
-//     storage,
-//     transforms: [
-//         encryptTransform({
-//             secretKey: process.env.REACT_APP_REDUX_STORAGE_SECRET_KEY
-//         }),
-//     ]
-// }
+const configPersistance = {
+    key: 'root',
+    storage,
+    transforms: [
+        encryptTransform({
+            secretKey: process.env.REACT_APP_REDUX_STORAGE_SECRET_KEY
+        }),
+    ]
+}
 
-// export const persistedReducer = persistReducer(configPersistance, groupedReducers)
+export const persistedReducer = persistReducer(configPersistance, groupedReducers)
 
-
+const useThunk = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(applyMiddleware(thunk)) : applyMiddleware(thunk)
 
 const configureStore = createStore(
-    groupedReducers,
+    persistedReducer,
     initialState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(applyMiddleware(thunk))
+    useThunk
 )
 
 export const persistor = persistStore(configureStore)
