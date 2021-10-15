@@ -37,7 +37,6 @@ export const Profile = ({ setAppDisplayState }) => {
     }
 
     const updateUserData = async (property, value) => {
-        console.log('updateUserData', property, '<<<<<<<<<<<<<propertty   value>>>>>>>>>>>>>>>>>>>>>>>', value)
         try {
             // Need to test later
             const baseUrl = `${process.env.REACT_APP_PROD_API_URL}user/me`
