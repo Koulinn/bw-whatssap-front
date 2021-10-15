@@ -38,12 +38,12 @@ export const groupedReducers = combineReducers({
 
 // export const persistedReducer = persistReducer(configPersistance, groupedReducers)
 
-
+const useThunk = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(applyMiddleware(thunk)) : applyMiddleware(thunk)
 
 const configureStore = createStore(
     groupedReducers,
     initialState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(applyMiddleware(thunk))
+    useThunk
 )
 
 export const persistor = persistStore(configureStore)

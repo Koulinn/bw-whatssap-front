@@ -40,7 +40,7 @@ export const setUserLogin = (email, password) => {
   }
 }
 
-export const registerUser = (name, email, password) => {
+export const registerUser = ({name, email, password}) => {
   return async (dispatch) => {
     const baseUrl = `${process.env.REACT_APP_PROD_API_URL}user/register`
     try {

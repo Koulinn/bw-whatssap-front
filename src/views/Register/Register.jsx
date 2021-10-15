@@ -49,7 +49,7 @@ export const Register = (props) => {
                             <InputDefault inputID="email" value={register.email} handleInput={handleInput} placeholderText='Enter your email' label="E-mail" />
 
                             <div className="col-8 d-flex pl-3 pt-5 mt-5 justify-content-center">
-                                <Button variant="success" onClick={() => dispatch(registerUser(name, email, password))}>Create an account</Button>
+                                <Button variant="success" onClick={() => dispatch(registerUser({name, email, password}))}>Create an account</Button>
                             </div>
 
                             <Divisor />
