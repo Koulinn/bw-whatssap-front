@@ -1,10 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { useSelector, useDispatch } from 'react-redux'
 import { socket } from '../../../../../AppPage'
 import { useState } from 'react'
 import { setRoomToDisplay } from '../../../../../../../redux/actions/chat-actions'
-import {format} from 'date-fns'
+import tools from '../../../../../../../tools'
 
 export const ChatRoom = ({ chat, setShowChatComponent, setSetCurrentDisplayedChatID }) => {
     const loggedUserId = useSelector(s => s.user.userData._id)
@@ -39,7 +38,7 @@ export const ChatRoom = ({ chat, setShowChatComponent, setSetCurrentDisplayedCha
                         <p className="mb-0 text-truncate text-secondary max-text-size-190"><small>{chatMember.bio ? chatMember.bio : 'Last Message'}</small></p>
                     </div>
                     <div className="d-flex w-25 flex-column">
-                        <small className="text-right">{format(new Date (chat.updatedAt), 'H:mm')}</small>
+                        <small className="text-right">{tools.formatDate(chat.updatedAt)}</small>
 
                     </div>
                 </div>
