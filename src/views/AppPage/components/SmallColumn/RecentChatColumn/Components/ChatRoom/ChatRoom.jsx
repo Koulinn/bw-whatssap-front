@@ -21,7 +21,7 @@ export const ChatRoom = ({ chat, setShowChatComponent, setSetCurrentDisplayedCha
 
 
     return (
-        <div className="d-flex pr-3" onClick={() => {
+        <div className="d-flex w-100 overflow-hidden pr-3" onClick={() => {
             setSetCurrentDisplayedChatID(chat._id)
             dispatch(setRoomToDisplay(chat))
             setShowChatComponent(true)
@@ -31,15 +31,15 @@ export const ChatRoom = ({ chat, setShowChatComponent, setSetCurrentDisplayedCha
             <div className="p-3">
                 <img className="avatar-chat-room" src={isGroup ? groupImage : chatMember.avatar} height='48' width="48" alt="" />
             </div>
-            <div className="d-flex align-items-center w-100 border-bottom">
-                <div className="d-flex pr-2 py-2 pl-0 w-100 justify-content-between">
-                    <div className="d-flex flex-column">
+            <div className="d-flex align-items-center w-100 border-bottom overflow-hidden">
+                <div className="d-flex pr-2 py-2 pl-0 w-100 overflow-hidden justify-content-between">
+                    <div className="d-flex w-75 mr-3 flex-column">
 
-                        <p className="mb-0 max-text-size-190">{isGroup ? `You and ${chat.members.length}` : chatMember.name}</p>
+                        <p className="mb-0 text-truncate max-text-size-190">{isGroup ? `You and ${chat.members.length}` : chatMember.name}</p>
                         <p className="mb-0 text-truncate text-secondary max-text-size-190"><small>{chatMember.bio ? chatMember.bio : 'Last Message'}</small></p>
                     </div>
-                    <div className="d-flex flex-column">
-                        <small>{format(new Date (chat.updatedAt), 'H:mm')}</small>
+                    <div className="d-flex w-25 flex-column">
+                        <small className="text-right">{format(new Date (chat.updatedAt), 'H:mm')}</small>
 
                     </div>
                 </div>
